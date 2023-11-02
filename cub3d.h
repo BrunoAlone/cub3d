@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/10/31 14:53:18 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:59:58 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 #include "../minilibx-linux/mlx.h"
 
 typedef	struct e_FPS
@@ -41,6 +42,21 @@ typedef	struct e_rayCast
 	double	cameraX;
 	double	rayDirX;
 	double	rayDirY;
+	int		mapX;
+	int		mapy;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+	int		color;
 }				t_rayCast;
 
 typedef	struct e_main
