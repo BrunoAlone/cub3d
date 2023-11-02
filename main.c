@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:38:44 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/02 15:12:59 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:54:08 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int	main()
 		}
 
 		// perform DDA
+		rayCast->hit = 0;
 		while (rayCast->hit == 0)
 		{
 			// Jump to next map square, eiher in x-direction, or in y-direction
@@ -143,10 +144,10 @@ int	main()
 		rayCast->lineHeight = (int)(screenHeight / rayCast->perpWallDist);
 
 		// Calculate lowest and highest pixel to fill in current stripe
-		rayCast->drawStart = -rayCast->lineHeight / 2 + screenHeight / 2;
+		rayCast->drawStart = ((rayCast->lineHeight * -1) / 2) + (screenHeight / 2);
 		if (rayCast->drawStart < 0)
 			rayCast->drawStart = 0;
-		rayCast->drawEnd = rayCast->lineHeight / 2+ screenHeight / 2;
+		rayCast->drawEnd = (rayCast->lineHeight / 2) + (screenHeight / 2);
 		if (rayCast->drawEnd >= screenHeight)
 			rayCast->drawEnd = screenHeight - 1;
 
