@@ -6,7 +6,7 @@
 #    By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 12:39:46 by brolivei          #+#    #+#              #
-#    Updated: 2023/11/02 15:19:37 by brolivei         ###   ########.fr        #
+#    Updated: 2023/11/03 11:58:11 by brolivei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBXFLAGS = -lX11 -lXext
 MINILIBX = ../minilibx-linux/libmlx.a
 CUB3D = cub3d
 
-SRCS_CUB3D = main.c
+SRCS_CUB3D = main.c rayCasting.c
 
 OBJS_CUB3D = $(SRCS_CUB3D:.c=.o)
 

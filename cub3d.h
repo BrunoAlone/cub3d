@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/02 15:55:08 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:05:08 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef	struct e_rayCast
 	double	rayDirX;
 	double	rayDirY;
 	int		mapX;
-	int		mapy;
+	int		mapY;
 	double	sideDistX;
 	double	sideDistY;
 	double	deltaDistX;
@@ -61,10 +61,12 @@ typedef	struct e_rayCast
 
 typedef	struct e_main
 {
-	void	*mlx;
-	void	*mlx_win;
+	void		*mlx;
+	void		*mlx_win;
+	t_rayCast	*rayCast;
+	t_FPS		*fps;
 }				t_main;
 
-
+void	rayCasting(t_main *main, int **worldMap);
 
 #endif
