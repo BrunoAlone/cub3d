@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/03 12:06:11 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:02:53 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	ft_lenght_to_next_edge(t_main *main)
 	if (main->rayCast->rayDirX == 0)
 		main->rayCast->deltaDistX = 1e30;
 	else
-		main->rayCast->deltaDistX = fabs(1 / main->rayCast->dirX);
+		main->rayCast->deltaDistX = fabs(1 / main->rayCast->rayDirX);
 	if (main->rayCast->rayDirY == 0)
 		main->rayCast->deltaDistY = 1e30;
 	else
-		main->rayCast->deltaDistY = fabs(1 / main->rayCast->dirY);
+		main->rayCast->deltaDistY = fabs(1 / main->rayCast->rayDirY);
 }
 
 void	ft_step_initial_sideDist(t_main *main)
@@ -95,7 +95,7 @@ void	ft_step_initial_sideDist(t_main *main)
 	}
 }
 
-void	ft_dda_perform(t_main *main, int **worldMap)
+void	ft_dda_perform(t_main *main, int worldMap[mapWidth][mapHeight])
 {
 	/*
 				Realizando o algoritmo DDA(Digital Differential Analyzer) para
@@ -176,7 +176,7 @@ void	ft_pixel_calculation(t_main *main)
 		main->rayCast->drawEnd = screenHeight - 1;
 }
 
-void	ft_colorize(t_main *main, int **worldMap)
+void	ft_colorize(t_main *main, int worldMap[mapWidth][mapHeight])
 {
 	if (worldMap[main->rayCast->mapX][main->rayCast->mapY] == 1)
 		main->rayCast->color = 0xFF0000;
@@ -192,7 +192,7 @@ void	ft_colorize(t_main *main, int **worldMap)
 		main->rayCast->color /= 2;
 }
 
-void	rayCasting(t_main *main, int **worldMap)
+void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 {
 	int	x;
 	int	y;
@@ -209,6 +209,7 @@ void	rayCasting(t_main *main, int **worldMap)
 		ft_projection_distance(main);
 		ft_pixel_calculation(main);
 		ft_colorize(main, worldMap);
+		y = main->rayCast->drawStart;
 		while (y < main->rayCast->drawEnd)
 		{
 			mlx_pixel_put(main->mlx, main->mlx_win, x, y, main->rayCast->color);
