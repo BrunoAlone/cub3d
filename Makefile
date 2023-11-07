@@ -6,7 +6,7 @@
 #    By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 12:39:46 by brolivei          #+#    #+#              #
-#    Updated: 2023/11/06 14:40:17 by brolivei         ###   ########.fr        #
+#    Updated: 2023/11/07 14:06:29 by brolivei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ LIBXFLAGS = -lX11 -lXext
 MINILIBX = ../minilibx-linux/libmlx.a
 CUB3D = cub3d
 
-SRCS_CUB3D = main.c rayCasting.c ft_events.c
+SRCS_CUB3D = main.c rayCasting.c ft_events.c mlx_handle.c movement.c\
+			utils/ft_memcpy.c
 
 OBJS_CUB3D = $(SRCS_CUB3D:.c=.o)
 
@@ -27,7 +28,7 @@ $(MINILIBX):
 				$(MAKE) -C ./minilibx-linux
 
 $(CUB3D):		$(OBJS_CUB3D)
-								$(CC) $(CCFLAGS) $(OBJS_CUB3D) ../minilibx-linux/libmlx.a -o $(CUB3D) $(LIBXFLAGS)
+								$(CC) $(CCFLAGS) $(OBJS_CUB3D) ../minilibx-linux/libmlx.a -o $(CUB3D) $(LIBXFLAGS) -lm
 
 %.o: %.c
 				$(CC) $(CCFLAGS) -c $< -o $@

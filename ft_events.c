@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/06 14:42:47 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:22:21 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,21 @@ int	close_window(t_main *main)
 	return (0);
 }
 
+int	movement(int keycode, t_main *main)
+{
+	if (keycode == W)
+		ft_moveForward(main, main->worldMap);
+	if (keycode == S)
+		ft_moveBackwards(main);
+	if (keycode == A)
+		ft_moveLeft(main);
+	if (keycode == D)
+		ft_moveRight(main);
+	return (0);
+}
+
 void	ft_events(t_main *main)
 {
+	mlx_key_hook(main->mlx_win, movement, main);
 	mlx_hook(main->mlx_win, 17, 0, close_window, main);
 }

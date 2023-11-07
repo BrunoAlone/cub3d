@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/06 14:31:31 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:22:07 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 #define mapHeight 24
 #define screenWidth 640
 #define screenHeight 480
+#define W 119
+#define S 115
+#define D 100
+#define A 97
+#define RIGHT 65363
+#define LEFT 65361
+#define ESC 65307
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,6 +80,7 @@ typedef	struct e_main
 {
 	void		*mlx;
 	void		*mlx_win;
+	int			worldMap[mapWidth][mapHeight];
 	t_rayCast	*rayCast;
 	t_FPS		*fps;
 	t_move		*move;
@@ -81,5 +89,19 @@ typedef	struct e_main
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight]);
 
 void	ft_events(t_main *main);
+
+void	initialize_mlx(t_main *main);
+
+void	ft_moveForward(t_main *main, int worldMap[mapWidth][mapHeight]);
+
+void	ft_moveBackwards(t_main *main);
+
+void	ft_moveLeft(t_main *main);
+
+void	ft_moveRight(t_main *main);
+
+//		UTILS
+
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif

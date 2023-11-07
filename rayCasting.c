@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/06 13:02:53 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:50:44 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,12 @@ void	ft_projection_distance(t_main *main)
 		main->rayCast->perpWallDist = (main->rayCast->sideDistX - main->rayCast->deltaDistX);
 	else
 		main->rayCast->perpWallDist = (main->rayCast->sideDistY - main->rayCast->deltaDistY);
-	main->rayCast->lineHeight = (int)(screenHeight / main->rayCast->perpWallDist);
+
+
+	if (main->rayCast->perpWallDist != 0)
+		main->rayCast->lineHeight = (int)(screenHeight / main->rayCast->perpWallDist);
+	else
+		main->rayCast->lineHeight = (int)screenHeight;
 }
 
 void	ft_pixel_calculation(t_main *main)
