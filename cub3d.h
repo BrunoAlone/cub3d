@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/07 14:22:07 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:53:44 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #define mapHeight 24
 #define screenWidth 640
 #define screenHeight 480
+#define texWidth 64
+#define texHeight 64
 #define W 119
 #define S 115
 #define D 100
@@ -41,6 +43,13 @@ typedef	struct e_FPS
 	char	fpsString[30];
 }				t_FPS;
 
+typedef	struct e_texture
+{
+	int	width; // Largura da textura
+	int	height; // Altura da textura
+	int	*data; // Dados da textura
+}				t_texture;
+
 typedef	struct e_rayCast
 {
 	double	posX;
@@ -52,6 +61,8 @@ typedef	struct e_rayCast
 	double	cameraX;
 	double	rayDirX;
 	double	rayDirY;
+	double	oldDirX;
+	double	oldPlaneX;
 	int		mapX;
 	int		mapY;
 	double	sideDistX;
@@ -84,6 +95,7 @@ typedef	struct e_main
 	t_rayCast	*rayCast;
 	t_FPS		*fps;
 	t_move		*move;
+	t_texture	*tex;
 }				t_main;
 
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight]);
@@ -99,6 +111,12 @@ void	ft_moveBackwards(t_main *main);
 void	ft_moveLeft(t_main *main);
 
 void	ft_moveRight(t_main *main);
+
+void	ft_rotate_right(t_main *main);
+
+void	ft_rotate_left(t_main *main);
+
+t_texture	ft_initialize_texture();
 
 //		UTILS
 

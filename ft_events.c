@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/07 14:22:21 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:25:09 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	close_window(t_main *main)
 	free(main->fps);
 	free(main->rayCast);
 	free(main->move);
+	free(main->tex->data);
+	free(main->tex);
 	free(main);
 	exit(0);
 	return (0);
@@ -35,6 +37,12 @@ int	movement(int keycode, t_main *main)
 		ft_moveLeft(main);
 	if (keycode == D)
 		ft_moveRight(main);
+	if (keycode == RIGHT)
+		ft_rotate_right(main);
+	if (keycode == LEFT)
+		ft_rotate_left(main);
+	if (keycode == ESC)
+		close_window(main);
 	return (0);
 }
 
