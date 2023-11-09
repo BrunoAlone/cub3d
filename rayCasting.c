@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/09 11:53:49 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:45:19 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,15 @@ void	my_mlx_pixel_put(t_image *imagem, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	ft_texel_color(t_main *main, int x, int y)
+{
+	int	*data;
+
+	data = (int *)mlx_get_data_addr(main->tex->tex->img, &main->tex->tex->bits_per_pixel,
+							&main->tex->tex->line_length, &main->tex->tex->endian);
+	main->rayCast->color = data[y * main->tex->width + x];
+}
+
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 {
 	int	x;
@@ -222,11 +231,11 @@ void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 		ft_dda_perform(main, worldMap);
 		ft_projection_distance(main);
 		ft_pixel_calculation(main);
-		ft_colorize(main, worldMap);
+		//ft_colorize(main, worldMap);
 		y = main->rayCast->drawStart;
+		ft_texel_color(main, x, y);
 		while (y < main->rayCast->drawEnd)
 		{
-			//mlx_pixel_put(main->mlx, main->mlx_win, x, y, main->rayCast->color);
 			my_mlx_pixel_put(main->img, x, y, main->rayCast->color);
 			y++;
 		}

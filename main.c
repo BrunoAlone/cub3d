@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:38:44 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/09 12:04:46 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:23:00 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,6 @@ int worldMap[mapWidth][mapHeight] =
 		{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
-
-/*
-int worldMap[mapWidth][mapHeight] =
-{
- {1,1,1,1,1},
- {1,0,0,0,1},
- {1,0,0,0,1},
- {1,0,0,0,1},
- {1,1,1,1,1}
-};
-*/
-
 void	ft_matrixCopy(int worldMap[mapWidth][mapHeight], t_main *main)
 {
 	int	i;
@@ -102,6 +90,8 @@ void ft_initVar(t_main *main)
 	main->rayCast = malloc(sizeof(t_rayCast));
 	main->move = malloc(sizeof(t_move));
 	main->img = malloc(sizeof(t_image));
+	main->tex = malloc(sizeof(t_tex));
+	main->tex->tex = malloc(sizeof(t_image));
 	ft_matrixCopy(worldMap, main);
 	main->rayCast->posX = 22; // x start position
 	main->rayCast->posY = 12;		  // y start position

@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/09 12:12:22 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:21:37 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef	struct s_image
 	int		line_length;
 	int		endian;
 }				t_image;
+
+typedef	struct s_tex
+{
+	t_image	*tex;
+	int		width;
+	int		height;
+}				t_tex;
 
 typedef	struct s_rayCast
 {
@@ -88,6 +95,7 @@ typedef	struct s_main
 	t_rayCast	*rayCast;
 	t_move		*move;
 	t_image		*img;
+	t_tex		*tex;
 }				t_main;
 
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight]);
