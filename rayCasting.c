@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/08 12:54:47 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:53:49 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,15 @@ void	ft_colorize(t_main *main, int worldMap[mapWidth][mapHeight])
 		main->rayCast->color /= 2;
 }
 
+void	my_mlx_pixel_put(t_image *imagem, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = imagem->addr + (y * imagem->line_length + x
+			* (imagem->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 {
 	int	x;
@@ -217,9 +226,11 @@ void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 		y = main->rayCast->drawStart;
 		while (y < main->rayCast->drawEnd)
 		{
-			mlx_pixel_put(main->mlx, main->mlx_win, x, y, main->rayCast->color);
+			//mlx_pixel_put(main->mlx, main->mlx_win, x, y, main->rayCast->color);
+			my_mlx_pixel_put(main->img, x, y, main->rayCast->color);
 			y++;
 		}
+		mlx_put_image_to_window(main->mlx, main->mlx_win, main->img->img, 0, 0);
 		x++;
 	}
 }

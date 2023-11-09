@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:38:44 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/08 14:11:56 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:04:46 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,8 @@ void	ft_matrixCopy(int worldMap[mapWidth][mapHeight], t_main *main)
 void ft_initVar(t_main *main)
 {
 	main->rayCast = malloc(sizeof(t_rayCast));
-	main->fps = malloc(sizeof(t_FPS));
 	main->move = malloc(sizeof(t_move));
-	main->tex = malloc(sizeof(t_texture));
+	main->img = malloc(sizeof(t_image));
 	ft_matrixCopy(worldMap, main);
 	main->rayCast->posX = 22; // x start position
 	main->rayCast->posY = 12;		  // y start position

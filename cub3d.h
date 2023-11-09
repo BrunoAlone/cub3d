@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/08 12:53:44 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:12:22 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,16 @@
 #include <time.h>
 #include "../minilibx-linux/mlx.h"
 
-typedef	struct e_FPS
+typedef	struct s_image
 {
-	clock_t	frameStart;
-	clock_t	frameEnd;
-	double	frameTime;
-	double	fps;
-	char	fpsString[30];
-}				t_FPS;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_image;
 
-typedef	struct e_texture
-{
-	int	width; // Largura da textura
-	int	height; // Altura da textura
-	int	*data; // Dados da textura
-}				t_texture;
-
-typedef	struct e_rayCast
+typedef	struct s_rayCast
 {
 	double	posX;
 	double	posY;
@@ -80,22 +73,21 @@ typedef	struct e_rayCast
 	int		color;
 }				t_rayCast;
 
-typedef	struct e_move
+typedef	struct s_move
 {
 	double	moveSpeed;
 	double	rotSpeed;
 }				t_move;
 
 
-typedef	struct e_main
+typedef	struct s_main
 {
 	void		*mlx;
 	void		*mlx_win;
 	int			worldMap[mapWidth][mapHeight];
 	t_rayCast	*rayCast;
-	t_FPS		*fps;
 	t_move		*move;
-	t_texture	*tex;
+	t_image		*img;
 }				t_main;
 
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight]);
@@ -116,7 +108,7 @@ void	ft_rotate_right(t_main *main);
 
 void	ft_rotate_left(t_main *main);
 
-t_texture	ft_initialize_texture();
+void	new_image(t_main *main);
 
 //		UTILS
 
