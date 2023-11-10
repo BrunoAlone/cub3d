@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/09 14:21:37 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:19:53 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,12 @@ typedef	struct s_image
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		line_length;
 	int		endian;
+	int		h;
+	int		w;
 }				t_image;
-
-typedef	struct s_tex
-{
-	t_image	*tex;
-	int		width;
-	int		height;
-}				t_tex;
 
 typedef	struct s_rayCast
 {
@@ -78,14 +73,13 @@ typedef	struct s_rayCast
 	int		drawStart;
 	int		drawEnd;
 	int		color;
+	double	wallX;
+	t_image	*tex;
+	int		tex_x;
+	int		tex_y;
+	double	tex_step;
+	double	tex_pos;
 }				t_rayCast;
-
-typedef	struct s_move
-{
-	double	moveSpeed;
-	double	rotSpeed;
-}				t_move;
-
 
 typedef	struct s_main
 {
@@ -93,9 +87,7 @@ typedef	struct s_main
 	void		*mlx_win;
 	int			worldMap[mapWidth][mapHeight];
 	t_rayCast	*rayCast;
-	t_move		*move;
 	t_image		*img;
-	t_tex		*tex;
 }				t_main;
 
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight]);

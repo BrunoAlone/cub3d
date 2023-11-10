@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/09 14:45:19 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:39:19 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,17 +202,17 @@ void	my_mlx_pixel_put(t_image *imagem, int x, int y, int color)
 	char	*dst;
 
 	dst = imagem->addr + (y * imagem->line_length + x
-			* (imagem->bits_per_pixel / 8));
+			* (imagem->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
-void	ft_texel_color(t_main *main, int x, int y)
+void	get_wallX(t_main *main)
 {
-	int	*data;
-
-	data = (int *)mlx_get_data_addr(main->tex->tex->img, &main->tex->tex->bits_per_pixel,
-							&main->tex->tex->line_length, &main->tex->tex->endian);
-	main->rayCast->color = data[y * main->tex->width + x];
+	if (main->rayCast->side == 0)
+		main->rayCast->wallX = main->rayCast->posY + main->rayCast->perpWallDist * main->rayCast->rayDirY;
+	if (main->rayCast->side == 1)
+		main->rayCast->wallX = main->rayCast->posX + main->rayCast->perpWallDist * main->rayCast->rayDirX;
+	main->rayCast->wallX -= floor(main->rayCast->wallX);
 }
 
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
@@ -232,11 +232,26 @@ void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 		ft_projection_distance(main);
 		ft_pixel_calculation(main);
 		//ft_colorize(main, worldMap);
+		get_wallX(main);
+
+		main->rayCast->tex_x = (int)(main->rayCast->wallX * (double)texWidth);
+		main->rayCast->tex_x = texWidth - main->rayCast->tex_x - 1;
+		main->rayCast->tex_step = 1.0 * texWidth / main->rayCast->lineHeight;
+		main->rayCast->tex_pos = (main->rayCast->drawStart - screenHeight / 2
+									+ main->rayCast->lineHeight / 2) * main->rayCast->tex_step;
+
+
 		y = main->rayCast->drawStart;
-		ft_texel_color(main, x, y);
 		while (y < main->rayCast->drawEnd)
 		{
-			my_mlx_pixel_put(main->img, x, y, main->rayCast->color);
+			main->rayCast->tex_y = (int)main->rayCast->tex_pos & (texHeight - 1);
+			main->rayCast->tex_pos += main->rayCast->tex_step;
+			if (x >= 0 && y >= 0 && main->rayCast->tex_x >= 0 && main->rayCast->tex_y >= 0)
+			{
+				main->rayCast->color = *(unsigned int *)((main->rayCast->tex->addr + (main->rayCast->tex_y * main->rayCast->tex->line_length)
+										+ (main->rayCast->tex_x * main->rayCast->tex->bpp / 8)));
+				my_mlx_pixel_put(main->img, x, y, main->rayCast->color);
+			}
 			y++;
 		}
 		mlx_put_image_to_window(main->mlx, main->mlx_win, main->img->img, 0, 0);
