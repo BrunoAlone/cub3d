@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/10 15:39:19 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:50:10 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,22 +181,6 @@ void	ft_pixel_calculation(t_main *main)
 		main->rayCast->drawEnd = screenHeight - 1;
 }
 
-void	ft_colorize(t_main *main, int worldMap[mapWidth][mapHeight])
-{
-	if (worldMap[main->rayCast->mapX][main->rayCast->mapY] == 1)
-		main->rayCast->color = 0xFF0000;
-	if (worldMap[main->rayCast->mapX][main->rayCast->mapY] == 2)
-		main->rayCast->color = 0x00FF11;
-	if (worldMap[main->rayCast->mapX][main->rayCast->mapY] == 3)
-		main->rayCast->color = 0x1100FF;
-	if (worldMap[main->rayCast->mapX][main->rayCast->mapY] == 4)
-		main->rayCast->color = 0xFFFFFF;
-	else
-		main->rayCast->color = 0xF7FF00;
-	if (main->rayCast->side == 1)
-		main->rayCast->color /= 2;
-}
-
 void	my_mlx_pixel_put(t_image *imagem, int x, int y, int color)
 {
 	char	*dst;
@@ -208,11 +192,52 @@ void	my_mlx_pixel_put(t_image *imagem, int x, int y, int color)
 
 void	get_wallX(t_main *main)
 {
+	/*
+				Calculo da coordenada onde o raio atinge a parede.
+
+			Se o lado atingido pelo raio for 0(lado horizontal), entao a coordenada
+		wallX sera calculada usando a posicao Y inicial do raio e distancia
+		perpendicular a parede, multiplicada pela direcao do raio no eixo Y.
+			Se o lado for 1(lado vertical), entao a coordenada wallX e calculada
+		usando a posicao X inicial do raio e a distancia perpendicular a parede
+		multiplicada pela direcao do raio no eixo X.
+
+			Apos isso, wallX e normalizada subtraindo a parte inteira da coordenada WallX
+		usando a funcao floor, para garantir que esteja no intervalo [0, 1];
+	*/
 	if (main->rayCast->side == 0)
 		main->rayCast->wallX = main->rayCast->posY + main->rayCast->perpWallDist * main->rayCast->rayDirY;
 	if (main->rayCast->side == 1)
 		main->rayCast->wallX = main->rayCast->posX + main->rayCast->perpWallDist * main->rayCast->rayDirX;
 	main->rayCast->wallX -= floor(main->rayCast->wallX);
+}
+
+void	ft_tex_projection(t_main *main)
+{
+	/*
+				Projecao da textura
+
+			tex_x e a coordenada da textura que sera usada para colorir o pixel
+		em questao.
+			Multiplicando wallX pela largura da textura dar-nos-a essa coordenada
+		na textura.
+			A subtracao em "main->rayCast->tex_x = texWidth - main->rayCast->tex_x - 1"
+		e feita para corrigir possiveis inversoes ou distorcoes na textura.
+
+			tex_step e o tamanho do passo que deve ser dado ao percorrer a textura
+		verticalmente por pixel na parede. Isso e calculado dividindo a largura da
+		textura pelo numero de pixels na altura da parede.
+
+			tex_pos e a posicao inicial na textura ao longo do eixo vertical. Isso
+		e calculado com baso na posicao inicial de desenho da parede para garantir que
+		a textura seja alinhada corretamente com a altura da parede na tela.
+	*/
+
+	main->rayCast->tex_x = (int)(main->rayCast->wallX * (double)texWidth);
+	main->rayCast->tex_x = texWidth - main->rayCast->tex_x - 1;
+	main->rayCast->tex_step = 1.0 * texWidth / main->rayCast->lineHeight;
+	main->rayCast->tex_pos = (main->rayCast->drawStart - screenHeight / 2
+								+ main->rayCast->lineHeight / 2) * main->rayCast->tex_step;
 }
 
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
@@ -231,16 +256,8 @@ void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 		ft_dda_perform(main, worldMap);
 		ft_projection_distance(main);
 		ft_pixel_calculation(main);
-		//ft_colorize(main, worldMap);
 		get_wallX(main);
-
-		main->rayCast->tex_x = (int)(main->rayCast->wallX * (double)texWidth);
-		main->rayCast->tex_x = texWidth - main->rayCast->tex_x - 1;
-		main->rayCast->tex_step = 1.0 * texWidth / main->rayCast->lineHeight;
-		main->rayCast->tex_pos = (main->rayCast->drawStart - screenHeight / 2
-									+ main->rayCast->lineHeight / 2) * main->rayCast->tex_step;
-
-
+		ft_tex_projection(main);
 		y = main->rayCast->drawStart;
 		while (y < main->rayCast->drawEnd)
 		{
@@ -248,8 +265,8 @@ void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 			main->rayCast->tex_pos += main->rayCast->tex_step;
 			if (x >= 0 && y >= 0 && main->rayCast->tex_x >= 0 && main->rayCast->tex_y >= 0)
 			{
-				main->rayCast->color = *(unsigned int *)((main->rayCast->tex->addr + (main->rayCast->tex_y * main->rayCast->tex->line_length)
-										+ (main->rayCast->tex_x * main->rayCast->tex->bpp / 8)));
+				main->rayCast->color = *(unsigned int *)((main->n_tex->addr + (main->rayCast->tex_y * main->n_tex->line_length)
+										+ (main->rayCast->tex_x * main->n_tex->bpp / 8)));
 				my_mlx_pixel_put(main->img, x, y, main->rayCast->color);
 			}
 			y++;
@@ -258,15 +275,3 @@ void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 		x++;
 	}
 }
-
-
-/*
-	int	worldMap[w][h]=
-	{
-		{11111},
-		{10001},
-		{10J01},
-		{10001},
-		{11111}
-	};
-*/

@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:38:44 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/10 14:07:27 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:13:18 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,29 @@ void	ft_matrixCopy(int worldMap[mapWidth][mapHeight], t_main *main)
 	}
 }
 
-void ft_initVar(t_main *main)
+void	ft_tex(t_main *main)
+{
+	main->paths[0] = ft_strdup("tex/n.xpm");
+	main->paths[1] = ft_strdup("tex/s.xpm");
+	main->paths[2] = ft_strdup("tex/e.xpm");
+	main->paths[3] = ft_strdup("tex/w.xpm");
+}
+
+void	ft_allocate_mem(t_main *main)
 {
 	main->rayCast = malloc(sizeof(t_rayCast));
 	main->img = malloc(sizeof(t_image));
-	main->rayCast->tex = malloc(sizeof(t_image));
+	main->n_tex = malloc(sizeof(t_image));
+	main->s_tex = malloc(sizeof(t_image));
+	main->e_tex = malloc(sizeof(t_image));
+	main->w_tex = malloc(sizeof(t_image));
+	main->paths = malloc(sizeof(char));
+	ft_tex(main);
+}
+
+void ft_initVar(t_main *main)
+{
+	ft_allocate_mem(main);
 	ft_matrixCopy(worldMap, main);
 	main->rayCast->posX = 22; // x start position
 	main->rayCast->posY = 12;		  // y start position

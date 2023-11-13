@@ -6,18 +6,18 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:41:41 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/10 14:14:16 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:15:03 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_xpm_image(t_main *main)
+void	get_xpm_image(t_main *main, t_image *img, int x)
 {
-	main->rayCast->tex->img = mlx_xpm_file_to_image(main->mlx, "tex.xpm",
-								&main->rayCast->tex->w, &main->rayCast->tex->h);
-	main->rayCast->tex->addr = mlx_get_data_addr(main->rayCast->tex->img, &main->rayCast->tex->bpp,
-								&main->rayCast->tex->line_length, &main->rayCast->tex->endian);
+	img->img = mlx_xpm_file_to_image(main->mlx, main->paths[x],
+								&img->w, &img->h);
+	img->addr = mlx_get_data_addr(img->img, &img->bpp,
+								&img->line_length, &img->endian);
 }
 
 void	initialize_mlx(t_main *main)
@@ -28,7 +28,10 @@ void	initialize_mlx(t_main *main)
 	main->img->addr = mlx_get_data_addr(main->img->img,
 		&main->img->bpp, &main->img->line_length,
 		&main->img->endian);
-	get_xpm_image(main);
+	get_xpm_image(main, main->n_tex, 0);
+	get_xpm_image(main, main->s_tex, 1);
+	get_xpm_image(main, main->e_tex, 2);
+	get_xpm_image(main, main->w_tex, 3);
 }
 
 void	new_image(t_main *main)

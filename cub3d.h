@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/10 15:19:53 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/13 12:12:23 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,13 @@ typedef	struct s_main
 	void		*mlx;
 	void		*mlx_win;
 	int			worldMap[mapWidth][mapHeight];
+	char		**paths;
 	t_rayCast	*rayCast;
 	t_image		*img;
+	t_image		*n_tex;
+	t_image		*s_tex;
+	t_image		*w_tex;
+	t_image		*e_tex;
 }				t_main;
 
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight]);
@@ -113,5 +118,9 @@ void	new_image(t_main *main);
 //		UTILS
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+
+char	*ft_strdup(const char *s);
+
+size_t	ft_strlen(const char *s);
 
 #endif

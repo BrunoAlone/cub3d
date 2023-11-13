@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/10 15:46:07 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:54:08 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 int	close_window(t_main *main)
 {
 	mlx_destroy_image(main->mlx, main->img->img);
-	mlx_destroy_image(main->mlx, main->rayCast->tex->img);
+	mlx_destroy_image(main->mlx, main->n_tex->img);
 	mlx_destroy_window(main->mlx, main->mlx_win);
 	mlx_destroy_display(main->mlx);
-	free(main->rayCast->tex);
 	free(main->img);
 	free(main->mlx);
 	free(main->rayCast);
