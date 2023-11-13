@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/13 12:50:10 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:28:51 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ void	get_wallX(t_main *main)
 	main->rayCast->wallX -= floor(main->rayCast->wallX);
 }
 
-void	ft_tex_projection(t_main *main)
+void	ft_tex_projection_x(t_main *main)
 {
 	/*
 				Projecao da textura
@@ -240,6 +240,30 @@ void	ft_tex_projection(t_main *main)
 								+ main->rayCast->lineHeight / 2) * main->rayCast->tex_step;
 }
 
+void	ft_tex_projection_y(t_main *main)
+{
+	/*
+			Tex_y e a coordenada Y na textura que corresponde a posicao vertical
+		do pixel na parede.
+
+			tex_pos representa a posicao vertical atual na textura, e (texHeight - 1)
+		e usado como uma mascara para garantir que o valor de tex_y esteja dentro dos
+		limites da altura da textura.
+
+			O operador & e usado para aplicar essa mascara.
+
+			tex_pos e convertido para inteiro.
+
+			O resultado desta operacao e a coordenada Y na textura correspondente a
+		posicao vertical do pixel na parede.
+
+			tex_pos e o avanco vertical na textura para o proximo pixel na parede.
+	*/
+
+	main->rayCast->tex_y = (int)main->rayCast->tex_pos & (texHeight - 1);
+	main->rayCast->tex_pos += main->rayCast->tex_step;
+}
+
 void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 {
 	int	x;
@@ -256,17 +280,30 @@ void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight])
 		ft_dda_perform(main, worldMap);
 		ft_projection_distance(main);
 		ft_pixel_calculation(main);
+		if (main->rayCast->side == 1)
+		{
+			if (main->rayCast->rayDirY < 0)
+				main->tex = main->s_tex;
+			else
+				main->tex = main->n_tex;
+		}
+		else
+		{
+			if (main->rayCast->rayDirX < 0)
+				main->tex = main->e_tex;
+			else
+				main->tex = main->w_tex;
+		}
 		get_wallX(main);
-		ft_tex_projection(main);
+		ft_tex_projection_x(main);
 		y = main->rayCast->drawStart;
 		while (y < main->rayCast->drawEnd)
 		{
-			main->rayCast->tex_y = (int)main->rayCast->tex_pos & (texHeight - 1);
-			main->rayCast->tex_pos += main->rayCast->tex_step;
+			ft_tex_projection_y(main);
 			if (x >= 0 && y >= 0 && main->rayCast->tex_x >= 0 && main->rayCast->tex_y >= 0)
 			{
-				main->rayCast->color = *(unsigned int *)((main->n_tex->addr + (main->rayCast->tex_y * main->n_tex->line_length)
-										+ (main->rayCast->tex_x * main->n_tex->bpp / 8)));
+				main->rayCast->color = *(unsigned int *)((main->tex->addr + (main->rayCast->tex_y * main->tex->line_length)
+										+ (main->rayCast->tex_x * main->tex->bpp / 8)));
 				my_mlx_pixel_put(main->img, x, y, main->rayCast->color);
 			}
 			y++;

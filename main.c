@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:38:44 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/13 12:13:18 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:17:49 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	ft_allocate_mem(t_main *main)
 	main->e_tex = malloc(sizeof(t_image));
 	main->w_tex = malloc(sizeof(t_image));
 	main->paths = malloc(sizeof(char));
+	main->tex = malloc(sizeof(t_image));
 	ft_tex(main);
 }
 

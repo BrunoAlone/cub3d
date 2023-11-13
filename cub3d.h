@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/13 12:12:23 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:17:00 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef	struct s_main
 	char		**paths;
 	t_rayCast	*rayCast;
 	t_image		*img;
+	t_image		*tex;
 	t_image		*n_tex;
 	t_image		*s_tex;
 	t_image		*w_tex;
