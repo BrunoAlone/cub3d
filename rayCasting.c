@@ -6,97 +6,11 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/14 15:16:45 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:31:39 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// void	ft_dda_perform(t_main *main, int worldMap[mapWidth][mapHeight])
-// {
-// 	/*
-// 				Realizando o algoritmo DDA(Digital Differential Analyzer) para
-// 			determinar qual parade foi atingida pelo raio.
-
-// 				main->rayCast->hit = 0; - Inicializa a variavel hit a zero, indicando que
-// 			o raio nao atingiu a parede.
-
-// 				Entramos num loop que continuara enquanto nenhum raio atingir uma parede.
-
-// 				Dentro do loop verificamos qual raio atingira uma aresta primeiro, se aresta
-// 			de X ou de Y.
-// 				Isso e feito comparando as distancias ja calculadas de sideDistX(distancia
-// 			ate a proxima aresta no eixo X) com sideDistY(distancia ate a proxima aresta no
-// 			eixo Y). Se sideDistX for menor, o raio avanca no eixo X, caso contrario, no Y.
-
-// 				A posicao do mapa (mapX e mapY) e atualizada de acordo com a direcao do raio(stepX e stepY).
-
-// 				side e atualizado para percebermos qual lado foi atingido, se X ou se Y.
-
-// 				Por fim, e verificado se a posicao atual no mapa e uma parede e se sim,
-// 			o loop e encerrado.
-// 	*/
-// 	main->rayCast->hit = 0;
-// 	while (main->rayCast->hit == 0)
-// 	{
-// 		if (main->rayCast->sideDistX < main->rayCast->sideDistY)
-// 		{
-// 			main->rayCast->sideDistX += main->rayCast->deltaDistX;
-// 			main->rayCast->mapX += main->rayCast->stepX;
-// 			main->rayCast->side = 0;
-// 		}
-// 		else
-// 		{
-// 			main->rayCast->sideDistY += main->rayCast->deltaDistY;
-// 			main->rayCast->mapY += main->rayCast->stepY;
-// 			main->rayCast->side = 1;
-// 		}
-// 		if (worldMap[main->rayCast->mapX][main->rayCast->mapY] > 0)
-// 			main->rayCast->hit = 1;
-// 	}
-// }
-
-// void	ft_projection_distance(t_main *main)
-// {
-// 	/*
-// 				Calculo da distancia perpendicular da parade ao plano da camara e
-// 			calculo da altura da linha que ira ser desenhada na tela.
-// 	*/
-// 	if (main->rayCast->side == 0)
-// 		main->rayCast->perpWallDist = (main->rayCast->sideDistX - main->rayCast->deltaDistX);
-// 	else
-// 		main->rayCast->perpWallDist = (main->rayCast->sideDistY - main->rayCast->deltaDistY);
-
-
-// 	if (main->rayCast->perpWallDist != 0)
-// 		main->rayCast->lineHeight = (int)(screenHeight / main->rayCast->perpWallDist);
-// 	else
-// 		main->rayCast->lineHeight = (int)screenHeight;
-// }
-
-// void	ft_pixel_calculation(t_main *main)
-// {
-// 	/*
-// 			Determinacao dos pixeis mais altos e mais baixo que serao preenchidos
-// 		na faixa vertical.
-
-// 			drawStart e calculado subtraindo metade da lineHeight do meio da tela (screenHeight / 2).
-// 		Isso servira para posicionar a linha de inicio da parede corretamente na tela.
-// 			E verificado se o resultado e menor que zero. Se for, e ajustado para zera para
-// 		garantir que nao haja valores negativos.
-
-// 			drawEnd e calculado somando metade da lineHeight ao meio da tela (sreenHeight / 2).
-// 		Isso determina a linha de fim da parede.
-// 			E verificado se o calculo ultrapassa a linha maxima de altura. Se sim, e ajustada
-// 		para o valor maximo da altura.
-// 	*/
-// 	main->rayCast->drawStart = -main->rayCast->lineHeight / 2 + screenHeight / 2;
-// 	if (main->rayCast->drawStart < 0)
-// 		main->rayCast->drawStart = 0;
-// 	main->rayCast->drawEnd = (main->rayCast->lineHeight / 2) + screenHeight / 2;
-// 	if (main->rayCast->drawEnd >= screenHeight)
-// 		main->rayCast->drawEnd = screenHeight - 1;
-// }
 
 void	my_mlx_pixel_put(t_image *imagem, int x, int y, int color)
 {
@@ -180,24 +94,6 @@ void	ft_tex_projection_y(t_main *main)
 	main->rayCast->tex_y = (int)main->rayCast->tex_pos & (texHeight - 1);
 	main->rayCast->tex_pos += main->rayCast->tex_step;
 }
-
-// void	ft_side_of_pixel(t_main *main)
-// {
-// 	if (main->rayCast->side == 1)
-// 	{
-// 		if (main->rayCast->rayDirY < 0)
-// 			main->tex = main->n_tex;
-// 		else
-// 			main->tex = main->s_tex;
-// 	}
-// 	else
-// 	{
-// 		if (main->rayCast->rayDirX < 0)
-// 			main->tex = main->w_tex;
-// 		else
-// 			main->tex = main->e_tex;
-// 	}
-// }
 
 void	ft_floor_and_ceiling(t_main *main)
 {
