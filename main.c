@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:38:44 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/13 14:17:49 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:14:22 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,61 +71,14 @@ int worldMap[mapWidth][mapHeight] =
 		{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
-void	ft_matrixCopy(int worldMap[mapWidth][mapHeight], t_main *main)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < mapWidth)
-	{
-		ft_memcpy(main->worldMap[i], worldMap[i], sizeof(worldMap[i]));
-		i++;
-	}
-}
-
-void	ft_tex(t_main *main)
-{
-	main->paths[0] = ft_strdup("tex/n.xpm");
-	main->paths[1] = ft_strdup("tex/s.xpm");
-	main->paths[2] = ft_strdup("tex/e.xpm");
-	main->paths[3] = ft_strdup("tex/w.xpm");
-}
-
-void	ft_allocate_mem(t_main *main)
-{
-	main->rayCast = malloc(sizeof(t_rayCast));
-	main->img = malloc(sizeof(t_image));
-	main->n_tex = malloc(sizeof(t_image));
-	main->s_tex = malloc(sizeof(t_image));
-	main->e_tex = malloc(sizeof(t_image));
-	main->w_tex = malloc(sizeof(t_image));
-	main->paths = malloc(sizeof(char));
-	main->tex = malloc(sizeof(t_image));
-	ft_tex(main);
-}
-
-void ft_initVar(t_main *main)
-{
-	ft_allocate_mem(main);
-	ft_matrixCopy(worldMap, main);
-	main->rayCast->posX = 22; // x start position
-	main->rayCast->posY = 12;		  // y start position
-	main->rayCast->dirX = -1;		  // Initial direction position x
-	main->rayCast->dirY = 0;		  // Intitial direction position y
-	main->rayCast->planeX = 0;
-	main->rayCast->planeY = 0.66;
-}
-
 int main()
 {
 	t_main *main;
 
 	main = malloc(sizeof(t_main));
-	ft_initVar(main);
+	ft_initVar(main, worldMap);
 	initialize_mlx(main);
-	rayCasting(main, main->worldMap);
+	rayCasting(main);
 	ft_events(main);
 	mlx_loop(main->mlx);
 	return (0);

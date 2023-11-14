@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/09 12:12:59 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:16:13 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_moveForward(t_main *main, int worldMap[mapWidth][mapHeight])
 	//mlx_clear_window(main->mlx, main->mlx_win);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main, worldMap);
+	rayCasting(main);
 }
 
 void	ft_moveBackwards(t_main *main)
@@ -41,7 +41,7 @@ void	ft_moveBackwards(t_main *main)
 	//mlx_clear_window(main->mlx, main->mlx_win);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main, main->worldMap);
+	rayCasting(main);
 }
 
 void	ft_moveLeft(t_main *main)
@@ -60,7 +60,7 @@ void	ft_moveLeft(t_main *main)
 	//mlx_clear_window(main->mlx, main->mlx_win);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main, main->worldMap);
+	rayCasting(main);
 }
 
 void	ft_moveRight(t_main *main)
@@ -79,7 +79,7 @@ void	ft_moveRight(t_main *main)
 	//mlx_clear_window(main->mlx, main->mlx_win);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main, main->worldMap);
+	rayCasting(main);
 }
 
 void	ft_rotate_right(t_main *main)
@@ -93,7 +93,7 @@ void	ft_rotate_right(t_main *main)
 	//mlx_clear_window(main->mlx, main->mlx_win);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main, main->worldMap);
+	rayCasting(main);
 }
 
 void	ft_rotate_left(t_main *main)
@@ -107,5 +107,5 @@ void	ft_rotate_left(t_main *main)
 	//mlx_clear_window(main->mlx, main->mlx_win);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main, main->worldMap);
+	rayCasting(main);
 }

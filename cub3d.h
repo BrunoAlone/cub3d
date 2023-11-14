@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/13 14:17:00 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:14:04 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ typedef	struct s_image
 	int		h;
 	int		w;
 }				t_image;
+
+typedef	struct s_f_c
+{
+	unsigned int	floor;
+	unsigned int	ceiling;
+}				t_f_c;
 
 typedef	struct s_rayCast
 {
@@ -94,9 +100,21 @@ typedef	struct s_main
 	t_image		*s_tex;
 	t_image		*w_tex;
 	t_image		*e_tex;
+	t_f_c		*f_c;
 }				t_main;
 
-void	rayCasting(t_main *main, int worldMap[mapWidth][mapHeight]);
+// Initialization
+
+void	ft_initVar(t_main *main, int worldMap[mapWidth][mapHeight]);
+
+// RayCasting
+
+void	rayFirstSteps(t_main *main, int x);
+
+void	raySecondsSteps(t_main *main);
+
+
+void	rayCasting(t_main *main);
 
 void	ft_events(t_main *main);
 
@@ -123,5 +141,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s);
 
 size_t	ft_strlen(const char *s);
+
+void	ft_matrixCopy(int worldMap[mapWidth][mapHeight], t_main *main);
 
 #endif
