@@ -6,7 +6,7 @@
 #    By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 12:39:46 by brolivei          #+#    #+#              #
-#    Updated: 2023/11/14 15:08:20 by brolivei         ###   ########.fr        #
+#    Updated: 2023/11/16 10:53:50 by brolivei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MINILIBX = ../minilibx-linux/libmlx.a
 CUB3D = cub3d
 
 SRCS_CUB3D = main.c rayCasting.c ft_events.c mlx_handle.c movement.c initialize.c\
-			rayCastingFirst.c rayCastingSecond.c\
+			rayCastingFirst.c rayCastingSecond.c tex_handle.c\
 			utils/ft_memcpy.c utils/ft_strdup.c utils/ft_strlen.c utils/ft_matrix.c
 
 OBJS_CUB3D = $(SRCS_CUB3D:.c=.o)

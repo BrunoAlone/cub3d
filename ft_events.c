@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/14 11:38:32 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:23:03 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	close_window(t_main *main)
 	free(main->paths);
 	free(main->img);
 	free(main->mlx);
-	free(main->rayCast);
+	free(main->raycast);
 	free(main->f_c);
 	free(main);
 	exit(0);
@@ -42,13 +42,13 @@ int	close_window(t_main *main)
 int	movement(int keycode, t_main *main)
 {
 	if (keycode == W)
-		ft_moveForward(main, main->worldMap);
+		ft_move_forward(main, main->world_map);
 	if (keycode == S)
-		ft_moveBackwards(main);
+		ft_move_backwards(main);
 	if (keycode == A)
-		ft_moveLeft(main);
+		ft_move_left(main);
 	if (keycode == D)
-		ft_moveRight(main);
+		ft_move_right(main);
 	if (keycode == RIGHT)
 		ft_rotate_right(main);
 	if (keycode == LEFT)

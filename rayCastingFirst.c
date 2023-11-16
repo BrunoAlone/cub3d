@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:52:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/14 15:04:57 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:24:50 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	ft_camera_and_dir(t_main *main, int x)
 {
-	main->rayCast->cameraX = 2 * x / (double)screenWidth - 1; // Coordenada x da camera no espaco
-	main->rayCast->rayDirX = main->rayCast->dirX + main->rayCast->planeX * main->rayCast->cameraX;
-	main->rayCast->rayDirY = main->rayCast->dirY + main->rayCast->planeY * main->rayCast->cameraX;
+	main->raycast->camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
+	main->raycast->raydir_x = main->raycast->dir_x
+		+ main->raycast->plane_x * main->raycast->camera_x;
+	main->raycast->raydir_y = main->raycast->dir_y
+		+ main->raycast->plane_y * main->raycast->camera_x;
 }
 
 /*
@@ -34,74 +36,80 @@ arredondar as coordenadas do jogador ao INT mais proximo.
 	Exemplo:
 
 		Se o jogador esta na posicao (2.3, 3.7) significa que ele
-	esta na celula (2, 4). mapX = 2 e mapY = 4.
+	esta na celula (2, 4). map_x = 2 e map_y = 4.
 */
 
 void	ft_cell_coordinate(t_main *main)
 {
-	main->rayCast->mapX = (int)main->rayCast->posX;
-	main->rayCast->mapY = (int)main->rayCast->posY;
+	main->raycast->map_x = (int)main->raycast->pos_x;
+	main->raycast->map_y = (int)main->raycast->pos_y;
 }
 
 /*
-		deltaDistX representa a distancia que o raio precisa percorrer para atingir
-	a proxima aresta X. Se rayDirX for igual a 0 significa que o raio e paralelo
-	ao eixo dos X, entao deltaDistX e definido com um valor grande para evitar divisao
-	por zero.
+		deltadist_x representa a distancia que o raio precisa percorrer para atingir
+	a proxima aresta X. Se raydir_x for igual a 0 significa que o raio e paralelo
+	ao eixo dos X, entao deltadist_x e definido com um valor grande
+	para evitar divisao por zero.
 
-		Caso contrario e calculador para o inverso da direcao X. E calculador com recurso
-	a funcao de valor absoluto pois estamos a falar de distancias, entao nao faz sentido
-	ter um numero negativo.
+		Caso contrario e calculador para o inverso da direcao X.
+	E calculador com recurso a funcao de valor absoluto pois
+	estamos a falar de distancias, entao nao faz sentido ter um numero negativo.
 */
 
 void	ft_lenght_to_next_edge(t_main *main)
 {
-	if (main->rayCast->rayDirX == 0)
-		main->rayCast->deltaDistX = 1e30;
+	if (main->raycast->raydir_x == 0)
+		main->raycast->deltadist_x = 1e30;
 	else
-		main->rayCast->deltaDistX = fabs(1 / main->rayCast->rayDirX);
-	if (main->rayCast->rayDirY == 0)
-		main->rayCast->deltaDistY = 1e30;
+		main->raycast->deltadist_x = fabs(1 / main->raycast->raydir_x);
+	if (main->raycast->raydir_y == 0)
+		main->raycast->deltadist_y = 1e30;
 	else
-		main->rayCast->deltaDistY = fabs(1 / main->rayCast->rayDirY);
+		main->raycast->deltadist_y = fabs(1 / main->raycast->raydir_y);
 }
 
 /*
-		StepX e StepY sao calculados com base na direcao do raio X e do raio Y.
-		stepX ira indicar se o raio esta a ir na direcao esquerda do mapa (-1) ou direita (1).
-		sideDistX representa a distancia do raio a primeira aresta a esquerda ou direita.
-		stepY ira indicar se o raio esta a ir para cima (-1) ou para baixo (1).
-		sideDistY representa a distancia do raio a primeira aresta acima ou abaixo.
+		Step_x e Step_y sao calculados com base na direcao do raio X e do raio Y.
+		step_x ira indicar se o raio esta a ir na direcao esquerda do mapa
+		(-1) ou direita (1).
+		sidedist_x representa a distancia do raio a primeira aresta a
+		esquerda ou direita.
+		step_y ira indicar se o raio esta a ir para cima (-1) ou para baixo (1).
+		sidedist_y representa a distancia do raio a primeira aresta acima ou abaixo.
 */
 
-void	ft_step_initial_sideDist(t_main *main)
+void	ft_step_initial_sidedist(t_main *main)
 {
-	if (main->rayCast->rayDirX < 0)
+	if (main->raycast->raydir_x < 0)
 	{
-		main->rayCast->stepX = -1;
-		main->rayCast->sideDistX = (main->rayCast->posX - main->rayCast->mapX) * main->rayCast->deltaDistX;
+		main->raycast->step_x = -1;
+		main->raycast->sidedist_x = (main->raycast->pos_x
+				- main->raycast->map_x) * main->raycast->deltadist_x;
 	}
 	else
 	{
-		main->rayCast->stepX = 1;
-		main->rayCast->sideDistX = (main->rayCast->mapX + 1.0 - main->rayCast->posX) * main->rayCast->deltaDistX;
+		main->raycast->step_x = 1;
+		main->raycast->sidedist_x = (main->raycast->map_x
+				+ 1.0 - main->raycast->pos_x) * main->raycast->deltadist_x;
 	}
-	if (main->rayCast->rayDirY < 0)
+	if (main->raycast->raydir_y < 0)
 	{
-		main->rayCast->stepY = -1;
-		main->rayCast->sideDistY = (main->rayCast->posY - main->rayCast->mapY) * main->rayCast->deltaDistY;
+		main->raycast->step_y = -1;
+		main->raycast->sidedist_y = (main->raycast->pos_y
+				- main->raycast->map_y) * main->raycast->deltadist_y;
 	}
 	else
 	{
-		main->rayCast->stepY = 1;
-		main->rayCast->sideDistY = (main->rayCast->mapY + 1.0 - main->rayCast->posY) * main->rayCast->deltaDistY;
+		main->raycast->step_y = 1;
+		main->raycast->sidedist_y = (main->raycast->map_y
+				+ 1.0 - main->raycast->pos_y) * main->raycast->deltadist_y;
 	}
 }
 
-void	rayFirstSteps(t_main *main, int x)
+void	ray_first_steps(t_main *main, int x)
 {
 	ft_camera_and_dir(main, x);
 	ft_cell_coordinate(main);
 	ft_lenght_to_next_edge(main);
-	ft_step_initial_sideDist(main);
+	ft_step_initial_sidedist(main);
 }

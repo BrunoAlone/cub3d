@@ -6,106 +6,117 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/14 15:16:13 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:23:51 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_moveForward(t_main *main, int worldMap[mapWidth][mapHeight])
+void	ft_move_forward(t_main *main, int worldMap[MAP_WIDTH][MAP_HEIGHT])
 {
-	if (worldMap[(int)(main->rayCast->posX + main->rayCast->dirX * 0.2)]
-		[(int)(main->rayCast->posY)] == 0)
+	if (worldMap[(int)(main->raycast->pos_x + main->raycast->dir_x * 0.2)]
+		[(int)(main->raycast->pos_y)] == 0)
 	{
-		main->rayCast->posX += main->rayCast->dirX * 0.2;
+		main->raycast->pos_x += main->raycast->dir_x * 0.2;
 	}
-	if (worldMap[(int)(main->rayCast->posX)]
-		[(int)(main->rayCast->posY + main->rayCast->dirY * 0.2)] == 0)
+	if (worldMap[(int)(main->raycast->pos_x)]
+		[(int)(main->raycast->pos_y + main->raycast->dir_y * 0.2)] == 0)
 	{
-		main->rayCast->posY += main->rayCast->dirY * 0.2;
+		main->raycast->pos_y += main->raycast->dir_y * 0.2;
 	}
-	//mlx_clear_window(main->mlx, main->mlx_win);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main);
+	ray_casting(main);
 }
 
-void	ft_moveBackwards(t_main *main)
+void	ft_move_backwards(t_main *main)
 {
-	if (main->worldMap[(int)(main->rayCast->posX - main->rayCast->dirX * 0.2)]
-		[(int)(main->rayCast->posY)] == 0)
-		main->rayCast->posX -= main->rayCast->dirX * 0.2;
-	if (main->worldMap[(int)(main->rayCast->posX)]
-		[(int)(main->rayCast->posY - main->rayCast->dirY * 0.2)] == 0)
-		main->rayCast->posY -= main->rayCast->dirY * 0.2;
-	//mlx_clear_window(main->mlx, main->mlx_win);
+	if (main->world_map[(int)(main->raycast->pos_x
+			- main->raycast->dir_x * 0.2)]
+		[(int)(main->raycast->pos_y)] == 0)
+		main->raycast->pos_x -= main->raycast->dir_x * 0.2;
+	if (main->world_map[(int)(main->raycast->pos_x)]
+		[(int)(main->raycast->pos_y - main->raycast->dir_y * 0.2)] == 0)
+		main->raycast->pos_y -= main->raycast->dir_y * 0.2;
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main);
+	ray_casting(main);
 }
 
-void	ft_moveLeft(t_main *main)
+void	ft_move_left(t_main *main)
 {
-	double	perpendicularX = -main->rayCast->dirY;
-	double	perpendicularY = main->rayCast->dirX;
+	double	perpendicular_x;
+	double	perpendicular_y;
+	double	move_x;
+	double	move_y;
 
-	double	moveX = perpendicularX * 0.2;
-	double	moveY = perpendicularY * 0.2;
-
-	if (main->worldMap[(int)(main->rayCast->posX + moveX)]
-		[(int)(main->rayCast->posY)] == 0)
-		main->rayCast->posX += moveX;
-	if (main->worldMap[(int)(main->rayCast->posX)][(int)(main->rayCast->posY + moveY)] == 0)
-		main->rayCast->posY += moveY;
-	//mlx_clear_window(main->mlx, main->mlx_win);
+	perpendicular_x = -main->raycast->dir_y;
+	perpendicular_y = main->raycast->dir_x;
+	move_x = perpendicular_x * 0.2;
+	move_y = perpendicular_y * 0.2;
+	if (main->world_map[(int)(main->raycast->pos_x + move_x)]
+		[(int)(main->raycast->pos_y)] == 0)
+		main->raycast->pos_x += move_x;
+	if (main->world_map[(int)(main->raycast->pos_x)]
+		[(int)(main->raycast->pos_y + move_y)] == 0)
+		main->raycast->pos_y += move_y;
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main);
+	ray_casting(main);
 }
 
-void	ft_moveRight(t_main *main)
+void	ft_move_right(t_main *main)
 {
-	double	perpendicularX = -main->rayCast->dirY;
-	double	perpendicularY = main->rayCast->dirX;
+	double	perpendicular_x;
+	double	perpendicular_y;
+	double	move_x;
+	double	move_y;
 
-	double	moveX = perpendicularX * 0.2 * (-1);
-	double	moveY = perpendicularY * 0.2 * (-1);
-
-	if (main->worldMap[(int)(main->rayCast->posX + moveX)]
-		[(int)(main->rayCast->posY)] == 0)
-		main->rayCast->posX += moveX;
-	if (main->worldMap[(int)(main->rayCast->posX)][(int)(main->rayCast->posY + moveY)] == 0)
-		main->rayCast->posY += moveY;
-	//mlx_clear_window(main->mlx, main->mlx_win);
+	perpendicular_x = -main->raycast->dir_y;
+	perpendicular_y = main->raycast->dir_x;
+	move_x = perpendicular_x * 0.2 * (-1);
+	move_y = perpendicular_y * 0.2 * (-1);
+	if (main->world_map[(int)(main->raycast->pos_x + move_x)]
+		[(int)(main->raycast->pos_y)] == 0)
+		main->raycast->pos_x += move_x;
+	if (main->world_map[(int)(main->raycast->pos_x)]
+		[(int)(main->raycast->pos_y + move_y)] == 0)
+		main->raycast->pos_y += move_y;
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main);
+	ray_casting(main);
 }
 
 void	ft_rotate_right(t_main *main)
 {
-	main->rayCast->oldDirX = main->rayCast->dirX;
-	main->rayCast->dirX = main->rayCast->dirX * cos(-0.2) - main->rayCast->dirY * sin(-0.2);
-	main->rayCast->dirY = main->rayCast->oldDirX * sin(-0.2) + main->rayCast->dirY * cos(-0.2);
-	main->rayCast->oldPlaneX = main->rayCast->planeX;
-	main->rayCast->planeX = main->rayCast->planeX * cos(-0.2) - main->rayCast->planeY * sin(-0.2);
-	main->rayCast->planeY = main->rayCast->oldPlaneX * sin(-0.2) + main->rayCast->planeY * cos(-0.2);
-	//mlx_clear_window(main->mlx, main->mlx_win);
+	main->raycast->olddir_x = main->raycast->dir_x;
+	main->raycast->dir_x = main->raycast->dir_x * cos(-0.2)
+		- main->raycast->dir_y * sin(-0.2);
+	main->raycast->dir_y = main->raycast->olddir_x * sin(-0.2)
+		+ main->raycast->dir_y * cos(-0.2);
+	main->raycast->oldplane_x = main->raycast->plane_x;
+	main->raycast->plane_x = main->raycast->plane_x * cos(-0.2)
+		- main->raycast->plane_y * sin(-0.2);
+	main->raycast->plane_y = main->raycast->oldplane_x * sin(-0.2)
+		+ main->raycast->plane_y * cos(-0.2);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main);
+	ray_casting(main);
 }
 
 void	ft_rotate_left(t_main *main)
 {
-	main->rayCast->oldDirX = main->rayCast->dirX;
-	main->rayCast->dirX = main->rayCast->dirX * cos(0.2) - main->rayCast->dirY * sin(0.2);
-	main->rayCast->dirY = main->rayCast->oldDirX * sin(0.2) + main->rayCast->dirY * cos(0.2);
-	main->rayCast->oldPlaneX = main->rayCast->planeX;
-	main->rayCast->planeX = main->rayCast->planeX * cos(0.2) - main->rayCast->planeY * sin(0.2);
-	main->rayCast->planeY = main->rayCast->oldPlaneX * sin(0.2) + main->rayCast->planeY * cos(0.2);
-	//mlx_clear_window(main->mlx, main->mlx_win);
+	main->raycast->olddir_x = main->raycast->dir_x;
+	main->raycast->dir_x = main->raycast->dir_x * cos(0.2)
+		- main->raycast->dir_y * sin(0.2);
+	main->raycast->dir_y = main->raycast->olddir_x * sin(0.2)
+		+ main->raycast->dir_y * cos(0.2);
+	main->raycast->oldplane_x = main->raycast->plane_x;
+	main->raycast->plane_x = main->raycast->plane_x * cos(0.2)
+		- main->raycast->plane_y * sin(0.2);
+	main->raycast->plane_y = main->raycast->oldplane_x * sin(0.2)
+		+ main->raycast->plane_y * cos(0.2);
 	mlx_destroy_image(main->mlx, main->img->img);
 	new_image(main);
-	rayCasting(main);
+	ray_casting(main);
 }
