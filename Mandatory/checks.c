@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:24:20 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/20 14:08:24 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:21:15 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	get_map(t_cub *cub, char **argv)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		cub->map[i++] = strdup(line);
+		cub->map[i++] = ft_strdup(line);
 		free(line);
 	}
 	if (i == 0)
@@ -118,6 +118,9 @@ int	check_player(t_cub *cub, t_check *check, int i)
 	return (0);
 }
 
+// cub->t_map[i][cub->length - 1] = '\n';    // length -> length -1
+// cub->t_map[i++][cub->length] = '\0';      // length +1 -> length
+
 int	checks(t_cub *cub, t_check *check, char **argv)
 {
 	static int	m;
@@ -127,7 +130,7 @@ int	checks(t_cub *cub, t_check *check, char **argv)
 	if (cub->mapa == 1)
 		return (myfree(cub->map), printf("Error: Empty .cub\n"), 1);
 	if (check_identifier(cub, check, 0, 0) == 1)
-		return (myfree(cub->map), printf("bad\n"), 1);
+		return (myfree(cub->map), freetext(cub), printf("bad\n"), 1);
 	m = cub->height - cub->t_height;
 	printf("m: %d\n", m);
 	cub->t_map = ft_calloc((cub->t_height + 1), sizeof(char *));
@@ -136,10 +139,10 @@ int	checks(t_cub *cub, t_check *check, char **argv)
 		cub->t_map[i] = ft_calloc(sizeof(char), cub->length + 1);
 		cub->t_map[i] = fillline(cub->t_map[i], cub->map[m++], cub);
 		cub->t_map[i] = replace(cub->t_map[i], ' ', 'X');
-		cub->t_map[i][cub->length - 1] = '\n';    // length -> length -1
-		cub->t_map[i++][cub->length] = '\0';      // length +1 -> length
+		cub->t_map[i][cub->length - 1] = '\n';
+		cub->t_map[i++][cub->length] = '\0';
 	}
 	if (check_player(cub, check, -1) || check_map(cub, check, 0))
-		return (myfree(cub->t_map), myfree(cub->map), 1);
+		return (myfree(cub->t_map), myfree(cub->map), freetext(cub), 1);
 	return (0);
 }

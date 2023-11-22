@@ -6,11 +6,26 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/21 12:00:45 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:12:44 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_matrix(t_main *main)
+{
+	int	x;
+
+	x = 0;
+	if (main->world_map == NULL)
+		return ;
+	while (x < main->map_width)
+	{
+		free(main->world_map[x]);
+		x++;
+	}
+	free(main->world_map);
+}
 
 int	close_window(t_main *main)
 {
@@ -21,6 +36,7 @@ int	close_window(t_main *main)
 	mlx_destroy_image(main->mlx, main->w_tex->img);
 	mlx_destroy_window(main->mlx, main->mlx_win);
 	mlx_destroy_display(main->mlx);
+	free_matrix(main);
 	free(main->n_tex);
 	free(main->s_tex);
 	free(main->e_tex);
@@ -34,6 +50,7 @@ int	close_window(t_main *main)
 	free(main->mlx);
 	free(main->raycast);
 	free(main->f_c);
+	myfree(main->map);
 	free(main);
 	exit(0);
 	return (0);
@@ -77,7 +94,6 @@ int	movement(int keycode, t_main *main)
 
 void	ft_events(t_main *main)
 {
-	//mlx_key_hook(main->mlx_win, movement, main);
 	mlx_hook(main->mlx_win, 17, 0, close_window, main);
 	mlx_hook(main->mlx_win, KeyPress, KeyPressMask, movement, main);
 	mlx_hook(main->mlx_win, KeyRelease, KeyReleaseMask, release_key, main);

@@ -4,7 +4,7 @@ MINILIBX = ../minilibx-linux/libmlx.a
 
 SRC = cub.c checks.c utils.c check_type.c utils2.c\
 		game.c rayCasting.c ft_events.c mlx_handle.c movement.c initialize.c\
-		rayCastingFirst.c rayCastingSecond.c tex_handle.c\
+		rayCastingFirst.c rayCastingSecond.c tex_handle.c rotation.c\
 
 CC = cc -g
 RM = rm -rf
@@ -18,9 +18,9 @@ BONUS_OBJ = $(BONUS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-								$(MAKE) -C ./minilibx-linux
+								$(MAKE) -C ../minilibx-linux
 								$(MAKE) -C ./Libft
-								@$(CC) $(CFLAGS) $(OBJ) minilibx-linux/libmlx.a ./Libft/libft.a -o $(NAME) $(LIBXFLAGS) -lm
+								@$(CC) $(CFLAGS) $(OBJ) ../minilibx-linux/libmlx.a ./Libft/libft.a -o $(NAME) $(LIBXFLAGS) -lm
 
 clean:
 		$(MAKE) clean -C ./Libft

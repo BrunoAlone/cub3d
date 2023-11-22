@@ -6,14 +6,14 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:01:26 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/20 14:34:01 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:27:19 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "cub3d.h"
 
-char *replace(char *str, char a, char b)
+char	*replace(char *str, char a, char b)
 {
 	int	i;
 
@@ -28,12 +28,12 @@ char *replace(char *str, char a, char b)
 
 char	*fillline(char *dest, char *src, t_cub *cub)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while (src[++i] && src[i] != '\n') // don't read new line
+	while (src[++i] && src[i] != '\n')
 		dest[i] = src[i];
-	while (i < cub->length)  // copia ate ao final
+	while (i < cub->length)
 		dest[i++] = 'X';
 	return (dest);
 }
@@ -56,4 +56,21 @@ void	freetext(t_cub *cub)
 	free(cub->stext);
 	free(cub->etext);
 	free(cub->wtext);
+}
+
+void	ft_allocate_matrix(t_main *main)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	main->world_map = (char **)malloc(main->map_width * sizeof(char *));
+	if (main->world_map == NULL)
+		return ;
+	while (i < main->map_width)
+	{
+		main->world_map[i] = (char *)malloc(main->map_height * sizeof(char));
+		i++;
+	}
 }

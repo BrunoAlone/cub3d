@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/20 14:33:22 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:39:36 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,36 +36,41 @@ void	ft_floor_and_ceiling(t_main *main)
 	}
 }
 
+int	ft_tex_color(t_main *main)
+{
+	int	color;
+
+	color = *(unsigned int *)((main->tex->addr
+				+ (main->raycast->tex_y * main->tex->line_length)
+				+ (main->raycast->tex_x * main->tex->bpp / 8)));
+	return (color);
+}
+
 void	ray_casting(t_main *main)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	ft_floor_and_ceiling(main);
 	y = 0;
-	while (x < SCREEN_WIDTH)
+	ft_floor_and_ceiling(main);
+	while (x++ < SCREEN_WIDTH)
 	{
 		ray_first_steps(main, x);
 		ray_seconds_steps(main);
 		get_wall_x(main);
 		ft_tex_projection_x(main);
 		y = main->raycast->drawstart;
-		while (y < main->raycast->drawend)
+		while (y++ < main->raycast->drawend)
 		{
 			ft_tex_projection_y(main);
 			if (x >= 0 && y >= 0 && main->raycast->tex_x >= 0
 				&& main->raycast->tex_y >= 0)
 			{
-				main->raycast->color = *(unsigned int *)((main->tex->addr
-							+ (main->raycast->tex_y * main->tex->line_length)
-							+ (main->raycast->tex_x * main->tex->bpp / 8)));
+				main->raycast->color = ft_tex_color(main);
 				my_mlx_pixel_put(main->img, x, y, main->raycast->color);
 			}
-			y++;
 		}
-		//mlx_put_image_to_window(main->mlx, main->mlx_win, main->img->img, 0, 0);
-		x++;
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img->img, 0, 0);
 }

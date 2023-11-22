@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/21 11:59:14 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:27:48 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <time.h>
-# include "minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include "cub.h"
 
@@ -103,6 +103,7 @@ typedef struct s_main
 	int			leftr;
 	char		**world_map;
 	char		**paths;
+	char		**map;
 	t_rayCast	*raycast;
 	t_image		*img;
 	t_image		*tex;
@@ -113,7 +114,7 @@ typedef struct s_main
 	t_f_c		*f_c;
 }				t_main;
 
-int	game(t_cub *cub);
+int		game(t_cub *cub);
 
 // Initialization
 
@@ -159,12 +160,10 @@ void	new_image(t_main *main);
 
 //		UTILS
 
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	ft_allocate_matrix(t_main *main);
 
-char	*ft_strdup(const char *s);
+void	ft_matrix_copy(char **world_map, t_main *min, t_cub *cub);
 
-size_t	ft_strlen(const char *s);
-
-void	ft_matrix_copy(char **world_map, t_main *main, t_cub *cub);
+int		close_window(t_main *main);
 
 #endif
