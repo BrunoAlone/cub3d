@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/22 14:01:09 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:04:15 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,9 @@ void	ft_allocate_matrix(t_main *main);
 void	ft_matrix_copy(char **world_map, t_main *min, t_cub *cub);
 
 int		close_window(t_main *main);
+
+// MiniMap
+
+void	draw_minimap(t_main *main);
 
 #endif
