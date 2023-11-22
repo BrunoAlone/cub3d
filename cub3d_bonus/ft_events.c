@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/16 12:23:03 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:00:45 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,37 @@ int	close_window(t_main *main)
 	return (0);
 }
 
+int	release_key(int keycode, t_main *main)
+{
+	if (keycode == W)
+		main->wr = 0;
+	if (keycode == S)
+		main->sr = 0;
+	if (keycode == A)
+		main->ar = 0;
+	if (keycode == D)
+		main->dr = 0;
+	if (keycode == RIGHT)
+		main->rightr = 0;
+	if (keycode == LEFT)
+		main->leftr = 0;
+	return (0);
+}
+
 int	movement(int keycode, t_main *main)
 {
 	if (keycode == W)
-		ft_move_forward(main, main->world_map);
+		main->wr = 1;
 	if (keycode == S)
-		ft_move_backwards(main);
+		main->sr = 1;
 	if (keycode == A)
-		ft_move_left(main);
+		main->ar = 1;
 	if (keycode == D)
-		ft_move_right(main);
+		main->dr = 1;
 	if (keycode == RIGHT)
-		ft_rotate_right(main);
+		main->rightr = 1;
 	if (keycode == LEFT)
-		ft_rotate_left(main);
+		main->leftr = 1;
 	if (keycode == ESC)
 		close_window(main);
 	return (0);
@@ -60,6 +77,8 @@ int	movement(int keycode, t_main *main)
 
 void	ft_events(t_main *main)
 {
-	mlx_key_hook(main->mlx_win, movement, main);
+	//mlx_key_hook(main->mlx_win, movement, main);
 	mlx_hook(main->mlx_win, 17, 0, close_window, main);
+	mlx_hook(main->mlx_win, KeyPress, KeyPressMask, movement, main);
+	mlx_hook(main->mlx_win, KeyRelease, KeyReleaseMask, release_key, main);
 }

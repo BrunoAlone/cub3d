@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/17 13:37:50 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:33:22 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,20 @@ void	ft_floor_and_ceiling(t_main *main)
 	}
 }
 
-void	ft_is_door(t_main *main)
-{
-	if (main->world_map[(int)(main->raycast->map_x)]
-		[(int)(main->raycast->map_y)] == 2)
-		main->tex = main->door;
-}
-
 void	ray_casting(t_main *main)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	y = 0;
 	ft_floor_and_ceiling(main);
+	y = 0;
 	while (x < SCREEN_WIDTH)
 	{
 		ray_first_steps(main, x);
 		ray_seconds_steps(main);
 		get_wall_x(main);
 		ft_tex_projection_x(main);
-		ft_is_door(main);
 		y = main->raycast->drawstart;
 		while (y < main->raycast->drawend)
 		{
@@ -76,5 +68,4 @@ void	ray_casting(t_main *main)
 		x++;
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img->img, 0, 0);
-	draw_minimap(main);
 }

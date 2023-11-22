@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:07:30 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/20 14:20:47 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:51:37 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_dda_perform(t_main *main, char **worldMap)
 			main->raycast->map_y += main->raycast->step_y;
 			main->raycast->side = 1;
 		}
-		if (worldMap[main->raycast->map_x][main->raycast->map_y] > '0')
+		if (worldMap[main->raycast->map_x][main->raycast->map_y] == '1')
 		{
 			main->raycast->hit = 1;
 		}

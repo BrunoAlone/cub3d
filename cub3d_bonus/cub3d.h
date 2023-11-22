@@ -34,7 +34,8 @@
 # include <unistd.h>
 # include <math.h>
 # include <time.h>
-# include "../minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
+# include <X11/X.h>
 
 typedef struct s_image
 {
@@ -92,7 +93,15 @@ typedef struct s_main
 {
 	void		*mlx;
 	void		*mlx_win;
-	int			world_map[MAP_WIDTH][MAP_HEIGHT];
+	int			map_width;
+	int			map_height;
+	int			wr;
+	int			sr;
+	int			ar;
+	int			dr;
+	int			rightr;
+	int			leftr;
+	char		**world_map;
 	char		**paths;
 	t_rayCast	*raycast;
 	t_image		*img;
@@ -101,7 +110,6 @@ typedef struct s_main
 	t_image		*s_tex;
 	t_image		*w_tex;
 	t_image		*e_tex;
-	t_image		*door;
 	t_f_c		*f_c;
 }				t_main;
 

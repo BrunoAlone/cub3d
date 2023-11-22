@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/21 11:41:27 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:59:14 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,11 @@ typedef struct s_main
 	int			map_width;
 	int			map_height;
 	int			wr;
-	int			ws;
+	int			sr;
+	int			ar;
+	int			dr;
+	int			rightr;
+	int			leftr;
 	char		**world_map;
 	char		**paths;
 	t_rayCast	*raycast;

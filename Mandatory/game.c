@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:38:44 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/21 11:17:07 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/22 10:27:01 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,24 @@
 
 int	moves(t_main *main)
 {
-	if (main->release == 0)
-	{
+	int	x;
+
+	x = 0;
+	x = main->wr + main->sr + main->ar + main->dr + main->rightr + main->leftr;
+	if (main->wr == 1)
 		ft_move_forward(main);
+	if (main->sr == 1)
+		ft_move_backwards(main);
+	if (main->ar == 1)
+		ft_move_left(main);
+	if (main->dr == 1)
+		ft_move_right(main);
+	if (main->rightr == 1)
+		ft_rotate_right(main);
+	if (main->leftr == 1)
+		ft_rotate_left(main);
+	if (x > 0)
 		return (1);
-	}
 	return (0);
 }
 

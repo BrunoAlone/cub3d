@@ -6,11 +6,12 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:35:02 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/17 13:29:55 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:49:28 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "cub.h"
 
 void	ft_find_direction(t_main *main, char dir)
 {
@@ -44,16 +45,32 @@ void	ft_find_direction(t_main *main, char dir)
 	}
 }
 
-void	ft_tex(t_main *main)
+void	ft_tex(t_main *main, t_cub *cub)
 {
-	main->paths[0] = ft_strdup("tex/n.xpm");
-	main->paths[1] = ft_strdup("tex/s.xpm");
-	main->paths[2] = ft_strdup("tex/e.xpm");
-	main->paths[3] = ft_strdup("tex/w.xpm");
-	main->paths[4] = ft_strdup("tex/door.xpm");
+	main->paths[0] = ft_strdup(cub->ntext);
+	main->paths[1] = ft_strdup(cub->stext);
+	main->paths[2] = ft_strdup(cub->etext);
+	main->paths[3] = ft_strdup(cub->wtext);
 }
 
-void	ft_allocate_mem(t_main *main)
+void	ft_allocate_matrix(t_main *main)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	main->world_map = (char**)malloc(main->map_width * sizeof(char *));
+	if (main->world_map == NULL)
+		return ;
+	while (i < main->map_width)
+	{
+		main->world_map[i] = (char*)malloc(main->map_height * sizeof(char));
+		i++;
+	}
+}
+
+void	ft_allocate_mem(t_main *main, t_cub *cub)
 {
 	main->raycast = malloc(sizeof(t_rayCast));
 	main->img = malloc(sizeof(t_image));
@@ -61,19 +78,21 @@ void	ft_allocate_mem(t_main *main)
 	main->s_tex = malloc(sizeof(t_image));
 	main->e_tex = malloc(sizeof(t_image));
 	main->w_tex = malloc(sizeof(t_image));
-	main->door = malloc(sizeof(t_image));
 	main->paths = malloc(4 * sizeof(char *));
 	main->f_c = malloc(sizeof(t_f_c));
-	ft_tex(main);
+	main->map_width = cub->t_height;
+	main->map_height = cub->length;
+	ft_allocate_matrix(main);
+	ft_tex(main, cub);
 }
 
-void	ft_initvar(t_main *main, int worldMap[MAP_WIDTH][MAP_HEIGHT])
+void	ft_initvar(t_main *main, t_cub *cub)
 {
-	ft_allocate_mem(main);
-	ft_matrix_copy(worldMap, main);
-	main->raycast->pos_x = 10;
-	main->raycast->pos_y = 9;
-	ft_find_direction(main, 'W');
-	main->f_c->floor = 0x228B22;
-	main->f_c->ceiling = 0x87CEEB;
+	ft_allocate_mem(main, cub);
+	ft_matrix_copy(cub->t_map, main, cub);
+	main->raycast->pos_x = cub->py;
+	main->raycast->pos_y = cub->px;
+	ft_find_direction(main, cub->player);
+	main->f_c->floor = cub->fcolor;
+	main->f_c->ceiling = cub->ccolor;
 }

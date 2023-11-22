@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/21 11:41:47 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:00:45 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,34 @@ int	close_window(t_main *main)
 int	release_key(int keycode, t_main *main)
 {
 	if (keycode == W)
-		main->wr = 1;
+		main->wr = 0;
 	if (keycode == S)
-		main->ws = 1;
+		main->sr = 0;
+	if (keycode == A)
+		main->ar = 0;
+	if (keycode == D)
+		main->dr = 0;
+	if (keycode == RIGHT)
+		main->rightr = 0;
+	if (keycode == LEFT)
+		main->leftr = 0;
 	return (0);
 }
 
 int	movement(int keycode, t_main *main)
 {
 	if (keycode == W)
-		main->wr = 0;
+		main->wr = 1;
 	if (keycode == S)
-		main->ws = 0;
-		//ft_move_backwards(main);
+		main->sr = 1;
 	if (keycode == A)
-		ft_move_left(main);
+		main->ar = 1;
 	if (keycode == D)
-		ft_move_right(main);
+		main->dr = 1;
 	if (keycode == RIGHT)
-		ft_rotate_right(main);
+		main->rightr = 1;
 	if (keycode == LEFT)
-		ft_rotate_left(main);
+		main->leftr = 1;
 	if (keycode == ESC)
 		close_window(main);
 	return (0);

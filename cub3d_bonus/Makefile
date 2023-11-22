@@ -6,7 +6,7 @@
 #    By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 12:39:46 by brolivei          #+#    #+#              #
-#    Updated: 2023/11/16 14:45:56 by brolivei         ###   ########.fr        #
+#    Updated: 2023/11/21 12:43:33 by brolivei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 CCFLAGS = -Wall -Wextra -Werror -g
 LIBXFLAGS = -lX11 -lXext
 
-MINILIBX = ../minilibx-linux/libmlx.a
+MINILIBX = minilibx-linux/libmlx.a
 CUB3D = cub3d
 
 SRCS_CUB3D = main.c rayCasting.c ft_events.c mlx_handle.c movement.c initialize.c\
