@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:41:41 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/16 11:57:03 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:58:31 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	initialize_mlx(t_main *main)
 	get_xpm_image(main, main->s_tex, 1);
 	get_xpm_image(main, main->e_tex, 2);
 	get_xpm_image(main, main->w_tex, 3);
+	get_xpm_image(main, main->d_tex, 4);
 }
 
 void	new_image(t_main *main)

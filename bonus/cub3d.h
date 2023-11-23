@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/22 14:04:15 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:41:03 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define RIGHT 65363
 # define LEFT 65361
 # define ESC 65307
+# define E 101
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -97,6 +98,7 @@ typedef struct s_main
 	int			sr;
 	int			ar;
 	int			dr;
+	int			er;
 	int			rightr;
 	int			leftr;
 	char		**world_map;
@@ -105,6 +107,7 @@ typedef struct s_main
 	t_rayCast	*raycast;
 	t_image		*img;
 	t_image		*tex;
+	t_image		*d_tex;
 	t_image		*n_tex;
 	t_image		*s_tex;
 	t_image		*w_tex;

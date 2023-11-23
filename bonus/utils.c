@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:19:37 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/22 15:02:46 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:01:21 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	redcol(char *str, int n)
 
 int	redcheck_map(t_check *check, t_cub *cub, int i, int j)
 {
-	if (!ft_strchr(" 10WESNX\n", cub->t_map[i][j]))
+	if (!ft_strchr(" 210WESNX\n", cub->t_map[i][j]))
 		return (printf("i: %i\nError: Inavid Character\n", i));
 	if (cub->t_map[i][j] == 49 && cub->t_map[i][j + 1] == 48
 		&& check->wall == 0)
@@ -92,9 +92,9 @@ int	redcheck_map(t_check *check, t_cub *cub, int i, int j)
 	{
 		if (((int)ft_strlen(cub->t_map[i - 1]) <= j) || i == cub->t_height - 1
 			|| (cub->t_map[i - 1][j] != 48 && cub->t_map[i - 1][j] != 49
-				&& cub->t_map[i - 1][j] != cub->player)
+				&& cub->t_map[i - 1][j] != cub->player && cub->t_map[i - 1][j] != 50)
 			|| (cub->t_map[i + 1][j] != 48 && cub->t_map[i + 1][j] != 49
-				&& cub->t_map[i + 1][j] != cub->player))
+				&& cub->t_map[i + 1][j] != cub->player && cub->t_map[i + 1][j] != 50))
 			return (printf("Error: Player Can Go To The Void!\n"), 1);
 	}
 	return (0);

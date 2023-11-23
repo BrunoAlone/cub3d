@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/22 12:12:44 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:44:19 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	release_key(int keycode, t_main *main)
 		main->rightr = 0;
 	if (keycode == LEFT)
 		main->leftr = 0;
+	if (keycode == E)
+		main->er = 0;
 	return (0);
 }
 
@@ -87,6 +89,22 @@ int	movement(int keycode, t_main *main)
 		main->rightr = 1;
 	if (keycode == LEFT)
 		main->leftr = 1;
+	if (keycode == E)
+	{
+		if (main->world_map[(int)(main->raycast->pos_x
+			+ main->raycast->dir_x * 1)]
+		[(int)(main->raycast->pos_y)] == '2')
+		main->world_map[(int)(main->raycast->pos_x
+			+ main->raycast->dir_x * 1)]
+		[(int)(main->raycast->pos_y)] = '3';
+		else if (main->world_map[(int)(main->raycast->pos_x
+			+ main->raycast->dir_x * 1)]
+		[(int)(main->raycast->pos_y)] == '3')
+		main->world_map[(int)(main->raycast->pos_x
+			+ main->raycast->dir_x * 1)]
+		[(int)(main->raycast->pos_y)] = '2';
+		main->er = 1;
+	}
 	if (keycode == ESC)
 		close_window(main);
 	return (0);
