@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:31:22 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/20 14:09:21 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:58:14 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_struct(t_cub *cub, t_check *check)
 	ft_bzero(cub, sizeof(t_cub));
 	ft_bzero(check, sizeof(t_check));
 }
+
 
 int	main(int argc, char **argv)
 {
