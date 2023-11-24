@@ -6,15 +6,14 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:37:53 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/22 12:20:02 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:24:45 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include "./Libft/libft.h"
-//# include "cub3d.h"
+# include "../Libft/libft.h"
 
 typedef struct check
 {
