@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:39:41 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/24 12:18:32 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:37:45 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub3d.h"
 
 int	color(t_check *check, char *s, int i, int j)
 {
@@ -39,4 +39,19 @@ int	color(t_check *check, char *s, int i, int j)
 			return (printf("many textures\n"), 1);
 	}
 	return (check->comma = 0, 0);
+}
+
+void	ft_free(void *content)
+{
+	if (!content)
+		return ;
+	free(content);
+}
+
+void	destroy_img(t_main *main, t_image *img)
+{
+	if (!img->img)
+		return ;
+	else
+		mlx_destroy_image(main->mlx, img->img);
 }

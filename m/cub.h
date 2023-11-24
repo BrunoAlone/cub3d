@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:37:53 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/24 12:56:17 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:38:36 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct check
 	int	f_line;
 	int	player;
 	int	comma;
-	void	*text_image;
 }	t_check;
 
 typedef struct cub
@@ -75,7 +74,7 @@ int		color(t_check *check, char *s, int i, int j);
 
 // Get Map Values
 
-int	get_map(t_cub *cub, char **argv);
+int		get_map(t_cub *cub, char **argv);
 
 void	get_height(t_cub	*cub, char **argv);
 

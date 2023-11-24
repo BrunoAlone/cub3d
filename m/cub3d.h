@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 15:58:25 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:37:28 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,9 @@ void	ft_allocate_matrix(t_main *main);
 void	ft_matrix_copy(char **world_map, t_main *min, t_cub *cub);
 
 int		close_window(t_main *main);
+
+void	ft_free(void *content);
+
+void	destroy_img(t_main *main, t_image *img);
 
 #endif

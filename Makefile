@@ -3,7 +3,7 @@ BONUS = cub3d_bonus
 
 MINILIBX = minilibx-linux/libmlx.a
 
-SRC = m/cub.c m/checks.c m/utils.c m/check_type.c m/utils2.c\
+SRC = m/cub.c m/checks.c m/utils.c m/check_type.c m/utils2.c m/utils3.c\
 		m/game.c m/rayCasting.c m/ft_events.c m/mlx_handle.c m/movement.c m/initialize.c\
 		m/rayCastingFirst.c m/rayCastingSecond.c m/tex_handle.c m/rotation.c
 

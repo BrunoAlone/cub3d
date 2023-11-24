@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:52:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 15:58:57 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:38:29 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ que podem ser float, para numeros inteiros, e devido ao facto de estarmos
 a trabalhar com um mapa sendo uma grelha 2D. Cada celula do mapa tem coordenadas
 (0,0) (0,1) etc
 
-	Entao para determinar em que celuala do mapa o raio esta, e necessario
+	Entao para determinar em que celula do mapa o raio esta, e necessario
 arredondar as coordenadas do jogador ao INT mais proximo.
 
 	Exemplo:
