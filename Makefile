@@ -7,7 +7,7 @@ SRC = m/cub.c m/checks.c m/utils.c m/check_type.c m/utils2.c m/utils3.c\
 		m/game.c m/rayCasting.c m/ft_events.c m/mlx_handle.c m/movement.c m/initialize.c\
 		m/rayCastingFirst.c m/rayCastingSecond.c m/tex_handle.c m/rotation.c
 
-BONUS_SRCS = b/cub.c b/checks.c b/utils.c b/check_type.c b/utils2.c\
+BONUS_SRCS = b/cub.c b/checks.c b/utils.c b/check_type.c b/utils2.c b/utils3.c\
 		b/game.c b/rayCasting.c b/ft_events.c b/mlx_handle.c b/movement.c b/initialize.c\
 		b/rayCastingFirst.c b/rayCastingSecond.c b/tex_handle.c b/rotation.c b/minimap.c\
 
@@ -39,7 +39,7 @@ clean:
 
 fclean: clean
 		$(MAKE) fclean -C Libft
-		@$(RM) $(NAME)
+		@$(RM) $(NAME) $(BONUS)
 
 re: fclean all
 		$(MAKE) re -C Libft

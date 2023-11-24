@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/24 11:00:51 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:45:34 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,29 @@ void	free_matrix(t_main *main)
 
 int	close_window(t_main *main)
 {
-	mlx_destroy_image(main->mlx, main->img->img);
-	mlx_destroy_image(main->mlx, main->n_tex->img);
-	mlx_destroy_image(main->mlx, main->s_tex->img);
-	mlx_destroy_image(main->mlx, main->e_tex->img);
-	mlx_destroy_image(main->mlx, main->w_tex->img);
+	destroy_img(main, main->img);
+	destroy_img(main, main->n_tex);
+	destroy_img(main, main->s_tex);
+	destroy_img(main, main->e_tex);
+	destroy_img(main, main->w_tex);
 	mlx_destroy_window(main->mlx, main->mlx_win);
 	mlx_destroy_display(main->mlx);
 	free_matrix(main);
-	free(main->n_tex);
-	free(main->s_tex);
-	free(main->e_tex);
-	free(main->w_tex);
-	free(main->paths[0]);
-	free(main->paths[1]);
-	free(main->paths[2]);
-	free(main->paths[3]);
-	free(main->paths);
-	free(main->img);
-	free(main->mlx);
-	free(main->raycast);
-	free(main->f_c);
+	ft_free(main->n_tex);
+	ft_free(main->s_tex);
+	ft_free(main->e_tex);
+	ft_free(main->w_tex);
+	ft_free(main->paths[0]);
+	ft_free(main->paths[1]);
+	ft_free(main->paths[2]);
+	ft_free(main->paths[3]);
+	ft_free(main->paths);
+	ft_free(main->img);
+	ft_free(main->mlx);
+	ft_free(main->raycast);
+	ft_free(main->f_c);
 	myfree(main->map);
-	free(main);
+	ft_free(main);
 	exit(0);
 	return (0);
 }

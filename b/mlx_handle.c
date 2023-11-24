@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:41:41 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 14:58:31 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:44:40 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	get_xpm_image(t_main *main, t_image *img, int x)
 {
 	img->img = mlx_xpm_file_to_image(main->mlx, main->paths[x],
 			&img->w, &img->h);
+	if (img->img == NULL)
+		return ;
 	img->addr = mlx_get_data_addr(img->img, &img->bpp,
 			&img->line_length, &img->endian);
 }
@@ -43,6 +45,13 @@ void	initialize_mlx(t_main *main)
 	get_xpm_image(main, main->e_tex, 2);
 	get_xpm_image(main, main->w_tex, 3);
 	get_xpm_image(main, main->d_tex, 4);
+	if (main->n_tex->img == NULL || main->s_tex->img == NULL
+		|| main->e_tex->img == NULL || main->w_tex->img == NULL)
+	{
+		printf("Error: No Texture\n");
+		close_window(main);
+		exit (1);
+	}
 }
 
 void	new_image(t_main *main)
