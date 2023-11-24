@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 11:12:03 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:58:25 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,7 @@ void	ray_seconds_steps(t_main *main);
 void	my_mlx_pixel_put(t_image *imagem, int x, int y, int color);
 
 // TEX
-main));
-	ft
+
 void	get_wall_x(t_main *main);
 
 void	ft_tex_projection_x(t_main *main);

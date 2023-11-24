@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:12:46 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 15:53:10 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:10:45 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	render_minimap(t_main *main, t_image *m_image)
 
 	x = 0;
 	y = 0;
-	while (x < (480 / 5))
+	while (x < (SCREEN_WIDTH / 5))
 	{
 		y = 0;
-		while (y < (480 / 5))
+		while (y < (SCREEN_HEIGHT / 3))
 		{
-			mat_x = (int)(x * main->map_width / (480 / 5));
-			mat_y = (int)(y * main->map_height / (480 / 5));
+			mat_x = (int)(x * main->map_width / (SCREEN_WIDTH / 5));
+			mat_y = (int)(y * main->map_height / (SCREEN_HEIGHT / 3));
 			// if (fabs(main->raycast->pos_x - mat_x) <= 5 && fabs(main->raycast->pos_y- mat_y) <= 5)
 			// {
 				if (main->world_map[mat_x][mat_y] == '2')
@@ -56,13 +56,13 @@ void	render_player(t_main *main, t_image *m_map)
 
 	x = 0;
 	y = 0;
-	while (x < (480 / 5))
+	while (x < (SCREEN_WIDTH / 5))
 	{
 		y = 0;
-		while (y < (480 / 5))
+		while (y < (SCREEN_HEIGHT / 3))
 		{
-			mat_x = (int)(x * main->map_width / (480 / 5));
-			mat_y = (int)(y * main->map_height / (480 / 5));
+			mat_x = (int)(x * main->map_width / (SCREEN_WIDTH / 5));
+			mat_y = (int)(y * main->map_height / (SCREEN_HEIGHT / 3));
 			if (mat_x == (int)main->raycast->pos_x && mat_y == (int)main->raycast->pos_y)
 				my_mlx_pixel_put(m_map, x, y, 0xFF4500);
 			y++;
@@ -80,8 +80,8 @@ void	draw_minimap(t_main *main)
 	x = 0;
 	y = 0;
 	mini_map = malloc(sizeof(t_image));
-	mini_map->img = mlx_new_image(main->mlx, (480 / 5),
-		(480 / 5));
+	mini_map->img = mlx_new_image(main->mlx, (SCREEN_WIDTH / 5),
+		(SCREEN_HEIGHT / 3));
 	mini_map->addr = mlx_get_data_addr(mini_map->img, &mini_map->bpp,
 		&mini_map->line_length, &mini_map->endian);
 	render_minimap(main, mini_map);

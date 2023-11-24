@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 15:41:03 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:01:01 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define LEFT 65361
 # define ESC 65307
 # define E 101
+# define M 109
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -99,6 +100,7 @@ typedef struct s_main
 	int			ar;
 	int			dr;
 	int			er;
+	int			mr;
 	int			rightr;
 	int			leftr;
 	char		**world_map;

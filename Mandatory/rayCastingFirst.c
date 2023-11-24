@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:52:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 11:35:06 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:58:57 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_cell_coordinate(t_main *main)
 {
 	main->raycast->map_x = (int)main->raycast->pos_x;
 	main->raycast->map_y = (int)main->raycast->pos_y;
-}``
+}
 
 /*
 		deltadist_x representa a distancia que o raio precisa percorrer para atingir
@@ -65,7 +65,7 @@ void	ft_lenght_to_next_edge(t_main *main)
 	if (main->raycast->raydir_y == 0)
 		main->raycast->deltadist_y = 1e30;
 	else
-		main->raycast->deltadist_y = fabs(1 / main->raycast->raydir_y);`
+		main->raycast->deltadist_y = fabs(1 / main->raycast->raydir_y);
 }
 
 /*

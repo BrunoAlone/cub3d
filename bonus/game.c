@@ -6,7 +6,7 @@
 /*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:38:44 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 15:42:55 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:01:19 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	moves(t_main *main)
 	int	x;
 
 	x = 0;
-	x = main->wr + main->sr + main->ar + main->dr + main->rightr + main->leftr + main->er;
+	x = main->wr + main->sr + main->ar + main->dr + main->rightr + main->leftr + main->er + main->mr;
 	if (main->wr == 1)
 		ft_move_forward(main);
 	if (main->sr == 1)
