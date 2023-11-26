@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:19:37 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/23 15:01:21 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:11:39 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	redcol2(char *str)
 	j = 0;
 	if ((str[j] == 50) && ((str[j + 1] == 53)
 			&& (str[j + 2] < 48 || str[j + 2] > 53)))
-		return (printf("Error1: Wrong Colors\n"), 1);
+		return (printf("Error1: Wrong Colors\n"));
 	if ((str[j] == 50) && ((str[j + 1] < 48 || str[j + 1] > 53)
 			|| (str[j + 2] < 48 || str[j + 2] > 57)))
-		return (printf("Error2: Wrong Colors\n"), 1);
+		return (printf("Error2: Wrong Colors\n"));
 	if ((str[j] < 48 || str[j] > 50) || (str[j + 1] < 48
 			|| str[j + 1] > 57) || (str[j + 2] < 48 || str[j + 2] > 57))
-		return (printf("Error3: Wrong Colors\n"), 1);
+		return (printf("Error3: Wrong Colors\n"));
 	return (0);
 }
 
@@ -53,29 +53,29 @@ int	redcol(char *str, int n)
 	j = 0;
 	if (n == 3)
 	{
-		if (redcol2(str) == 1)
+		if (redcol2(str))
 			return (1);
 	}
 	else if (n == 2)
 	{
 		if ((str[j] < 48 || str[j] > 57)
 			|| (str[j + 1] < 48 || str[j + 1] > 57))
-			return (printf("Error2: Wrong Colors\n"), 1);
+			return (printf("Error2: Wrong Colors\n"));
 	}
 	else if (n == 1)
 	{
 		if (str[j] < 48 || str[j] > 57)
-			return (printf("Error3: Wrong Colors\n"), 1);
+			return (printf("Error3: Wrong Colors\n"));
 	}
 	else
-		return (printf("Error: many numbers\n"), 1);
+		return (printf("Error: many numbers\n"));
 	return (0);
 }
 
 int	redcheck_map(t_check *check, t_cub *cub, int i, int j)
 {
 	if (!ft_strchr(" 210WESNX\n", cub->t_map[i][j]))
-		return (printf("i: %i\nError: Inavid Character\n", i));
+		return (printf("Error: Inavid Character\n"));
 	if (cub->t_map[i][j] == 49 && cub->t_map[i][j + 1] == 48
 		&& check->wall == 0)
 		check->wall = 1;
@@ -91,10 +91,10 @@ int	redcheck_map(t_check *check, t_cub *cub, int i, int j)
 		|| cub->t_map[i][j] == 48)
 	{
 		if (((int)ft_strlen(cub->t_map[i - 1]) <= j) || i == cub->t_height - 1
-			|| (cub->t_map[i - 1][j] != 48 && cub->t_map[i - 1][j] != 49
-				&& cub->t_map[i - 1][j] != cub->player && cub->t_map[i - 1][j] != 50)
-			|| (cub->t_map[i + 1][j] != 48 && cub->t_map[i + 1][j] != 49
-				&& cub->t_map[i + 1][j] != cub->player && cub->t_map[i + 1][j] != 50))
+			|| ((cub->t_map[i - 1][j] < 48 || cub->t_map[i - 1][j] > 50)
+				&& cub->t_map[i - 1][j] != cub->player)
+			|| ((cub->t_map[i + 1][j] < 48 || cub->t_map[i + 1][j] > 50)
+				&& cub->t_map[i + 1][j] != cub->player))
 			return (printf("Error: Player Can Go To The Void!\n"), 1);
 	}
 	return (0);

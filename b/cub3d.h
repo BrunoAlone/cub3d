@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:58 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/24 14:47:53 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:06:31 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_main
 	t_image		*s_tex;
 	t_image		*w_tex;
 	t_image		*e_tex;
+	t_image		*minimap;
 	t_f_c		*f_c;
 }				t_main;
 
@@ -141,7 +142,7 @@ void	ft_tex_projection_x(t_main *main);
 
 void	ft_tex_projection_y(t_main *main);
 
-void	ray_casting(t_main *main);
+void	ray_casting(t_main *main, int x, int y);
 
 void	ft_events(t_main *main);
 
@@ -161,6 +162,8 @@ void	ft_rotate_left(t_main *main);
 
 void	new_image(t_main *main);
 
+int		ft_door(t_main *main);
+
 //		UTILS
 
 void	ft_allocate_matrix(t_main *main);
@@ -171,7 +174,7 @@ int		close_window(t_main *main);
 
 void	ft_free(void *content);
 
-void	destroy_img(t_main *main, t_image *img);
+void	destroy_img(t_main *main);
 
 // MiniMap
 

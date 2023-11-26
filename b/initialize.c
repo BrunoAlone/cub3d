@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:35:02 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/24 11:00:57 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:56:58 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_tex(t_main *main, t_cub *cub)
 	main->paths[1] = cub->stext;
 	main->paths[2] = cub->etext;
 	main->paths[3] = cub->wtext;
-	main->paths[4] = ft_strdup("textures/door.xpm");
+	main->paths[4] = ("textures/door.xpm");
 }
 
 void	ft_allocate_mem(t_main *main, t_cub *cub)
@@ -67,6 +67,8 @@ void	ft_allocate_mem(t_main *main, t_cub *cub)
 	main->s_tex = malloc(sizeof(t_image));
 	main->e_tex = malloc(sizeof(t_image));
 	main->w_tex = malloc(sizeof(t_image));
+	main->d_tex = malloc(sizeof(t_image));
+	main->minimap = malloc(sizeof(t_image));
 	main->paths = malloc(5 * sizeof(char *));
 	main->f_c = malloc(sizeof(t_f_c));
 	main->map_width = cub->t_height;
@@ -77,9 +79,9 @@ void	ft_allocate_mem(t_main *main, t_cub *cub)
 	main->ar = 0;
 	main->dr = 0;
 	main->er = 0;
+	main->mr = 0;
 	main->rightr = 0;
 	main->leftr = 0;
-	main->d_tex = malloc(sizeof(t_image));
 }
 
 void	ft_initvar(t_main *main, t_cub *cub)

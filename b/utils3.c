@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:39:41 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/24 14:37:45 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:58:37 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,39 @@ void	ft_free(void *content)
 	free(content);
 }
 
-void	destroy_img(t_main *main, t_image *img)
+void	destroy_img(t_main *main)
 {
-	if (!img->img)
-		return ;
+	if (main->img->img)
+		mlx_destroy_image(main->mlx, main->img->img);
+	if (main->n_tex->img)
+		mlx_destroy_image(main->mlx, main->n_tex->img);
+	if (main->s_tex->img)
+		mlx_destroy_image(main->mlx, main->s_tex->img);
+	if (main->e_tex->img)
+		mlx_destroy_image(main->mlx, main->e_tex->img);
+	if (main->w_tex->img)
+		mlx_destroy_image(main->mlx, main->w_tex->img);
+	if (main->d_tex->img)
+		mlx_destroy_image(main->mlx, main->d_tex->img);
+	if (main->minimap->img)
+		mlx_destroy_image(main->mlx, main->minimap->img);
 	else
-		mlx_destroy_image(main->mlx, img->img);
+		return ;
+}
+
+int	ft_door(t_main *main)
+{
+	if (main->world_map[(int)(main->raycast->pos_x
+			+ main->raycast->dir_x * 1)]
+		[(int)(main->raycast->pos_y)] == '2')
+		main->world_map[(int)(main->raycast->pos_x
+				+ main->raycast->dir_x * 1)]
+		[(int)(main->raycast->pos_y)] = '3';
+	else if (main->world_map[(int)(main->raycast->pos_x
+			+ main->raycast->dir_x * 1)]
+			[(int)(main->raycast->pos_y)] == '3')
+		main->world_map[(int)(main->raycast->pos_x
+				+ main->raycast->dir_x * 1)]
+		[(int)(main->raycast->pos_y)] = '2';
+	return (0);
 }

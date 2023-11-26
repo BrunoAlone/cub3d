@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rayCastingSecond.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:07:30 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/23 15:17:03 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:07:34 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	ft_dda_perform(t_main *main, char **worldMap)
 			main->raycast->map_y += main->raycast->step_y;
 			main->raycast->side = 1;
 		}
-		if (worldMap[main->raycast->map_x][main->raycast->map_y] == '1' || worldMap[main->raycast->map_x][main->raycast->map_y] == '2')
+		if (worldMap[main->raycast->map_x][main->raycast->map_y] == '1'
+			|| worldMap[main->raycast->map_x][main->raycast->map_y] == '2')
 		{
 			main->raycast->hit = 1;
 		}

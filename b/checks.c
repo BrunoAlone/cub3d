@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:24:20 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/22 14:44:32 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 15:23:12 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	get_map(t_cub *cub, char **argv)
+int	get_map(t_cub *cub, char **argv)
 {
 	char				*line;
 	static int			i;
@@ -20,14 +20,11 @@ void	get_map(t_cub *cub, char **argv)
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-	{
-		printf("Error: File don't exist\n");
-		return ((void)close(fd));
-	}
+		return ((void)close(fd), printf("Error: File don't exist\n"));
 	get_height(cub, argv);
 	cub->map = ft_calloc(sizeof(char *), cub->height + 1);
 	if (!cub->map)
-		return ;
+		return (1);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -39,6 +36,7 @@ void	get_map(t_cub *cub, char **argv)
 	if (i == 0)
 		cub->mapa = 1;
 	close(fd);
+	return (0);
 }
 
 void	get_height(t_cub *cub, char **argv)
@@ -75,7 +73,7 @@ int	check_map(t_cub *cub, t_check *check, int j)
 			continue ;
 		}
 		if (cub->t_map[i][j] != 49)
-			return (printf("i: %i\nError: Map don't start walls\n", i));
+			return (printf("Error: Map don't start walls\n"));
 		while (cub->t_map[i][j])
 		{
 			if (redcheck_map(check, cub, i, j))
@@ -118,19 +116,17 @@ int	check_player(t_cub *cub, t_check *check, int i)
 	return (0);
 }
 
-// cub->t_map[i][cub->length - 1] = '\n';    // length -> length -1
-// cub->t_map[i++][cub->length] = '\0';      // length +1 -> length
-
 int	checks(t_cub *cub, t_check *check, char **argv)
 {
 	static int	m;
 	static int	i;
 
-	get_map(cub, argv);
+	if (get_map(cub, argv))
+		return (1);
 	if (cub->mapa == 1)
 		return (myfree(cub->map), printf("Error: Empty .cub\n"), 1);
 	if (check_identifier(cub, check, 0, 0) == 1)
-		return (myfree(cub->map), freetext(cub), printf("bad\n"), 1);
+		return (myfree(cub->map), freetext(cub), 1);
 	m = cub->height - cub->t_height;
 	cub->t_map = ft_calloc((cub->t_height + 1), sizeof(char *));
 	while (cub->map[m])

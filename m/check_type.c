@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:44:29 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/24 12:24:38 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:23:11 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	check_identifier(t_cub *cub, t_check *check, int i, int j)
 		}
 		else if (cub->map[i][0] == '\n')
 			check->total--;
-		else 
+		else
 			return (printf("Error: Wrong Type Identifier\n"), 1);
 		i++;
 		check->total++;

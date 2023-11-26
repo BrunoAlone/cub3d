@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:24:20 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/24 12:16:29 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:36:17 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	check_map(t_cub *cub, t_check *check, int j)
 			continue ;
 		}
 		if (cub->t_map[i][j] != 49)
-			return (printf("i: %i\nError: Map don't start walls\n", i));
+			return (printf("Error: Map don't start walls\n"));
 		while (cub->t_map[i][j])
 		{
 			if (redcheck_map(check, cub, i, j))

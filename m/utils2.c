@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:01:26 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/24 11:39:20 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/26 15:00:22 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ void	freetext(t_cub *cub)
 void	ft_allocate_matrix(t_main *main)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	main->world_map = (char **)malloc(main->map_width * sizeof(char *));
 	if (main->world_map == NULL)
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:19:37 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/24 12:19:25 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:46:32 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	redcol(char *str, int n)
 int	redcheck_map(t_check *check, t_cub *cub, int i, int j)
 {
 	if (!ft_strchr(" 10WESNX\n", cub->t_map[i][j]))
-		return (printf("i: %i\nError: Inavid Character\n", i));
+		return (printf("Error: Inavid Character\n"));
 	if (cub->t_map[i][j] == 49 && cub->t_map[i][j + 1] == 48
 		&& check->wall == 0)
 		check->wall = 1;

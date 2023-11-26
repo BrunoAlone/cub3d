@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_events.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:30:54 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/24 14:45:34 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:01:11 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	free_matrix(t_main *main)
 
 int	close_window(t_main *main)
 {
-	destroy_img(main, main->img);
-	destroy_img(main, main->n_tex);
-	destroy_img(main, main->s_tex);
-	destroy_img(main, main->e_tex);
-	destroy_img(main, main->w_tex);
+	destroy_img(main);
 	mlx_destroy_window(main->mlx, main->mlx_win);
 	mlx_destroy_display(main->mlx);
 	free_matrix(main);
@@ -41,6 +37,8 @@ int	close_window(t_main *main)
 	ft_free(main->s_tex);
 	ft_free(main->e_tex);
 	ft_free(main->w_tex);
+	ft_free(main->d_tex);
+	ft_free(main->minimap);
 	ft_free(main->paths[0]);
 	ft_free(main->paths[1]);
 	ft_free(main->paths[2]);
@@ -91,18 +89,7 @@ int	movement(int keycode, t_main *main)
 		main->leftr = 1;
 	if (keycode == E)
 	{
-		if (main->world_map[(int)(main->raycast->pos_x
-			+ main->raycast->dir_x * 1)]
-		[(int)(main->raycast->pos_y)] == '2')
-		main->world_map[(int)(main->raycast->pos_x
-			+ main->raycast->dir_x * 1)]
-		[(int)(main->raycast->pos_y)] = '3';
-		else if (main->world_map[(int)(main->raycast->pos_x
-			+ main->raycast->dir_x * 1)]
-		[(int)(main->raycast->pos_y)] == '3')
-		main->world_map[(int)(main->raycast->pos_x
-			+ main->raycast->dir_x * 1)]
-		[(int)(main->raycast->pos_y)] = '2';
+		ft_door(main);
 		main->er = 1;
 	}
 	if (keycode == ESC)

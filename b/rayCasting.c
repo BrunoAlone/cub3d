@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rayCasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/24 11:02:30 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:06:41 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,8 @@ int	ft_tex_color(t_main *main)
 	return (color);
 }
 
-void	ray_casting(t_main *main)
+void	ray_casting(t_main *main, int x, int y)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
 	ft_floor_and_ceiling(main);
 	while (x++ < SCREEN_WIDTH)
 	{
@@ -73,7 +68,6 @@ void	ray_casting(t_main *main)
 				my_mlx_pixel_put(main->img, x, y, main->raycast->color);
 			}
 		}
-		//mlx_put_image_to_window(main->mlx, main->mlx_win, main->img->img, 0, 0);
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img->img, 0, 0);
 	draw_minimap(main);

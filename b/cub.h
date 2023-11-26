@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:37:53 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/24 11:55:45 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:59:10 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,60 @@ typedef struct cub
 	int				px;
 }	t_cub;
 
+// Init
+
 int		main(int argc, char **argv);
+
+void	init_struct(t_cub *cub, t_check *check);
+
+// Checks
+
 int		ft_check_cub(char **argv);
 
 int		checks(t_cub *cub, t_check *check, char **argv);
-void	get_map(t_cub *cub, char **argv);
-void	get_height(t_cub	*cub, char **argv);
 
-int		ft_strcmp(char *str, char *str2);
-void	myfree(char **str);
-int		redcol(char *str, int n);
+int		check_map(t_cub *cub, t_check *check, int j);
 
 int		check_identifier(t_cub *cub, t_check *check, int i, int j);
 
-int		check_texture(char *type, char *str);
-int		redux(int *i, int *j, t_check *check);
-int		redcheck_map(t_check *check, t_cub *cub, int i, int j);
-char	*replace(char *str, char a, char b);
-char	*fillline(char *dest, char *src, t_cub *cub);
-void	freetext(t_cub *cub);
+int		type1(t_check *check, t_cub *cub, int i, int j);
 
-int		check_player(t_cub *cub, t_check *check, int n);
+int		type2(t_check *check, char *str, t_cub *cub);
+
+int		color(t_check *check, char *s, int i, int j);
+
+// Get Map Values
+
+int		get_map(t_cub *cub, char **argv);
+
+void	get_height(t_cub	*cub, char **argv);
+
+int		check_player(t_cub *cub, t_check *check, int i);
+
+int		tex(char *str, int i, char **s);
+
+void	get_hex_color(char *str, unsigned long *s, int i);
+
+// Utils
+
+int		ft_strcmp(char *str, char *str2);
+
+char	*fillline(char *dest, char *src, t_cub *cub);
+
+char	*replace(char *str, char a, char b);
+
+// Line Reduction
+
+int		redcol(char *str, int n);
+
+int		redcol2(char *str);
+
+int		redcheck_map(t_check *check, t_cub *cub, int i, int j);
+
+// Clean
+
+void	myfree(char **str);
+
+void	freetext(t_cub *cub);
 
 #endif

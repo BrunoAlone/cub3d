@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 09:41:41 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/24 14:44:40 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:04:14 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	initialize_mlx(t_main *main)
 	get_xpm_image(main, main->w_tex, 3);
 	get_xpm_image(main, main->d_tex, 4);
 	if (main->n_tex->img == NULL || main->s_tex->img == NULL
-		|| main->e_tex->img == NULL || main->w_tex->img == NULL)
+		|| main->e_tex->img == NULL || main->w_tex->img == NULL
+		|| main->d_tex->img == NULL)
 	{
 		printf("Error: No Texture\n");
 		close_window(main);
