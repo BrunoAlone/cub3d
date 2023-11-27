@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:12:46 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/26 20:19:37 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:23:37 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	render_minimap(t_main *main, t_image *m_image, int x, int y)
 	while (x < (SCREEN_WIDTH / 5))
 	{
 		y = 0;
-		while (y < (SCREEN_HEIGHT / 3))
+		while (y < ((SCREEN_HEIGHT / 3) - 5))
 		{
 			mat_x = (int)(x * main->map_width / (SCREEN_WIDTH / 5));
 			mat_y = (int)(y * main->map_height / (SCREEN_HEIGHT / 3));

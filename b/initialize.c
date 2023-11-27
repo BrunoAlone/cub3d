@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:35:02 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/26 16:56:58 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:17:24 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_allocate_mem(t_main *main, t_cub *cub)
 	main->e_tex = malloc(sizeof(t_image));
 	main->w_tex = malloc(sizeof(t_image));
 	main->d_tex = malloc(sizeof(t_image));
-	main->minimap = malloc(sizeof(t_image));
+	main->minimap = ft_calloc(sizeof(t_image), 1);
 	main->paths = malloc(5 * sizeof(char *));
 	main->f_c = malloc(sizeof(t_f_c));
 	main->map_width = cub->t_height;
