@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rayCasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
+/*   By: dcarrilh <dcarrilh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:12:45 by brolivei          #+#    #+#             */
-/*   Updated: 2023/11/22 12:39:36 by brolivei         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:24:42 by dcarrilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	ft_floor_and_ceiling(t_main *main)
 		y = 0;
 		while (y < (SCREEN_HEIGHT / 2))
 		{
-			my_mlx_pixel_put(main->img, x, y, main->f_c->floor);
+			my_mlx_pixel_put(main->img, x, y, main->f_c->ceiling);
 			y++;
 		}
 		while (y < (SCREEN_HEIGHT - 1))
 		{
-			my_mlx_pixel_put(main->img, x, y, main->f_c->ceiling);
+			my_mlx_pixel_put(main->img, x, y, main->f_c->floor);
 			y++;
 		}
 		x++;

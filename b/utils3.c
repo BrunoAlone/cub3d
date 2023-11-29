@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarrilh <dcarrilh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: brolivei < brolivei@student.42porto.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:39:41 by dcarrilh          #+#    #+#             */
-/*   Updated: 2023/11/26 19:58:37 by dcarrilh         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:13:38 by brolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,13 @@ int	ft_door(t_main *main)
 		main->world_map[(int)(main->raycast->pos_x
 				+ main->raycast->dir_x * 1)]
 		[(int)(main->raycast->pos_y)] = '2';
+	if (main->world_map[(int)(main->raycast->pos_x)]
+		[(int)(main->raycast->pos_y + main->raycast->dir_y * 1)] == '2')
+		main->world_map[(int)(main->raycast->pos_x)]
+		[(int)(main->raycast->pos_y + main->raycast->dir_y * 1)] = '3';
+	else if (main->world_map[(int)(main->raycast->pos_x)]
+		[(int)(main->raycast->pos_y + main->raycast->dir_y * 1)] == '3')
+		main->world_map[(int)(main->raycast->pos_x)]
+		[(int)(main->raycast->pos_y + main->raycast->dir_y * 1)] = '2';
 	return (0);
 }
